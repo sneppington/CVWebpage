@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'SquaredFont'">
+    <img src="Storage/overlay.png" style="pointer-events: none; position: absolute; width: 100vw; height: 100vh; object-fit: fill; opacity: 0.1; z-index: 1;">
+    <div style="pointer-events: none; display: flex; align-items: center; justify-content: center; width: 100%; height: 100vh; position: absolute; overflow: hidden;">
+        <video id="background-load-video" autoplay muted loop>
+            <source src="Storage/Vids/vecteezy_the-black-screen-vcr-distortion-effect_28001043.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+        <div id="loading-wrapper">
+            <span id="loading-text" style="font-family: 'SquaredFont'; color: rgba(233, 233, 233, 0.885); margin-bottom: 1vw; font-size: calc(15px + 1vw * 0.5);">
+                Loading
+            </span>
+            <div id="loader">
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div style="pointer-events: none; display: flex; align-items: center; justify-content: center; width: 100vw; height: 100vh; position: absolute;">
+            <video id="background" autoplay muted loop>
+                <source src="Storage/Vids/stock-footage-wireframe-sphere-computer-generated-d-render.webm" type="video/mp4">
+            </video>
+        </div>
+        <div id="themes-wrapper">
+            <div style="display: flex; flex-direction: column; gap: 10vh; align-items: center; justify-content: center; position: absolute; width: 100vw; height: 100vh;">
+                <div id="who" class="theme-card" style="transform: translate(-15vw, 0px); position: relative;">
+                    <div class="theme-card-title">
+                        <div style="white-space: nowrap; width: auto; margin: 5px;">
+                            <b>Who</b>
+                        </div>
+                    </div>
+                    <img src="Storage/userIcon.svg" style="width: 100%; height: 100%;">
+                </div>
+                <div id="skills" class="theme-card" style="transform: translate(18vw, -20px); position: relative;">
+                    <div class="theme-card-title">
+                        <div style="white-space: nowrap; width: auto; margin: 5px;">
+                            <b>Skills</b>
+                        </div>
+                    </div>
+                    <svg style="width: 100%; height: 100%;" fill="rgba(233, 233, 233, 0.885)" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 172 260" enable-background="new 0 0 172 260" xml:space="preserve">
+                    <path d="M45.999,210h80v15.917h-80V210z M97.999,258h-24c-8.837,0-16-7.163-16-16v-4h56v4C113.999,250.837,106.836,258,97.999,258z
+                        M83.973,2.024C38.1,3.104,1.263,41.516,2.011,87.395c0.353,21.69,8.928,41.381,22.743,56.093
+                        c13.44,14.314,21.245,33.004,21.245,52.64v1.789h34V128h-16v-12h44v12h-16v69.917h34v-1.793c0-19.601,7.746-38.292,21.18-52.566
+                        c14.15-15.034,22.82-35.283,22.82-57.558C169.999,38.935,131.291,0.91,83.973,2.024z"/>
+                    </svg>
+                </div>
+                <div id="projects" class="theme-card" style="transform: translate(-11vw, 30px); position: relative;">
+                    <div class="theme-card-title">
+                        <div style="white-space: nowrap; width: auto; margin: 5px;">
+                            <b>Projects</b>
+                        </div>
+                    </div>
+                    <img src="Storage/folderSvg.svg" style="width: 90%; height: 90%; margin: 5%;">
+                </div>
+            </div>
+        </div>
+        <div class="window-border">
+        </div>
+        <div style="display: flex; align-items: flex-end; justify-content: center; width: 100vw; height: 100vh;">
+            <div id="who-theme" class="theme-window">
+                <div class="window-top">
+                    <div class="close-left">
+                    </div>
+                    <div class="close-right">
+                    </div>
+                    <div class="close-button">
+                        <div class="close-1"></div>
+                        <div class="close-2"></div>
+                    </div>
+                </div>
+                <div class="inner-theme-scroll" style="height: calc(100% - 70px); width: 100vw; overflow-y: scroll; position: absolute;">
+                    <div style="margin-top: 30px; margin-left: 10vw; margin-right: 17vw; font-family: SquaredFont;">
+                        <div style="width: 100%; display: flex;">
+                            <div>
+                                <div id="photography">
+                                </div>
+                                <div style="font-size: large;">
+                                    Victor Churruca
+                                </div>
+                            </div>
+                            <div style="margin-left: 1vw; display: flex; flex-direction: column;">
+                                <div style="font-size: min(50px, 5vw);">
+                                    <b>Who am I</b>
+                                </div>
+                                <div>
+                                    I am a passionate frontend developer with a strong focus on creating unique and engaging web experiences. 
+                                    <br>With over four years of daily coding experience, I thrive in turning creative ideas into functional designs using the usual technologies of the sector.
+                                    <br>In addition to web development, I have collaborated on game development projects with teams, honing my skills in teamwork, communication, and meeting tight deadlines. 
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Technical Skills
+                            </div>
+                            <span style="color: rgba(136, 157, 225, 0.885);">Coding Experience:</span> 4 years of daily coding practice.<br><br>
+                            <span class="strong-yellow">Languages & Frameworks:</span>
+                            <ul>
+                                <li><span class="yellow">Lua:</span> Initial experience in game development.</li>
+                                <li><span class="yellow">Python:</span> Utilized for data analysis with tools like SQL and Pandas.</li>
+                                <li><span class="yellow">JavaScript:</span> Advanced knowledge and practical experience.</li>
+                                <li><span class="yellow">React:</span> Basic proficiency with practical applications.</li>
+                            </ul><br>
+                            <span class="strong-yellow">Web Development:</span>
+                            <ul>
+                                <li><span class="yellow">HTML:</span> Strong proficiency.</li>
+                                <li><span class="yellow">CSS:</span> Strong proficiency.</li>
+                                <li><span class="yellow">JavaScript:</span> Strong proficiency.</li>
+                            </ul>
+                            <br><br>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Professional Experience
+                            </div>
+                            <ul>
+                                <li>
+                                    <span class="yellow">Volunteer Programmer:</span> Developed a mobile app for a team competition under a tight schedule.
+                                </li>
+                                <li>
+                                    <span class="yellow">IT Department Coordinator:</span> Managed and coordinated the IT department for a group of over 80 members.
+                                </li>
+                                <li>
+                                    <span class="yellow">Volunteer Scripter:</span> Collaborated with designers at a game development studio, working under strict deadlines.
+                                </li>
+                                <li>
+                                    <span class="yellow">Mentorship:</span> Integrated a junior developer into the project, providing guidance and support.
+                                </li>
+                            </ul>
+                            <br><br>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Achievements
+                            </div>
+                            <ul>
+                                <li>
+                                    <span class="yellow">National Contest Qualification:</span> Developed an app that enabled our team to advance to the national level of a prestigious competition.
+                                </li>
+                                <li>
+                                    <span class="yellow">Language Proficiency:</span> Achieved a C1 level in English (native Spanish speaker).
+                                </li>
+                                <li>
+                                    <span class="yellow">Certification:</span> Google Sheets certified by Google.
+                                </li>
+                            </ul>
+                            <br><br>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Key Skills
+                            </div>
+                            <ul>
+                                <li>
+                                    <span class="yellow">Problem-Solving:</span> Employers value candidates who can find innovative solutions to challenges, especially in a fast-paced development environment.
+                                </li>
+                                <li>
+                                    <span class="yellow">Teamwork:</span> The ability to collaborate effectively with other developers, designers, and stakeholders is crucial for most projects.
+                                </li>
+                                <li>
+                                    <span class="yellow">Communication:</span> Clear and effective communication is essential for working with team members and understanding project requirements.
+                                </li>
+                                <li>
+                                    <span class="yellow">Adaptability:</span> The tech industry evolves rapidly, so being able to quickly learn and adapt to new technologies and methodologies is a key asset.
+                                </li>
+                                <li>
+                                    <span class="yellow">Time Management:</span> Being able to manage your time effectively and meet deadlines is important in delivering projects successfully.
+                                </li>
+                                <li>
+                                    <span class="yellow">Attention to Detail:</span> Ensuring your code is clean, functional, and user-friendly requires a keen eye for detail.
+                                </li>
+                            </ul>
+                            <br><br>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Career Goals
+                            </div>
+                            I am seeking a stable and fulfilling job where I can leverage my frontend development skills to create engaging web experiences. I value a work environment that promotes a healthy work-life balance and minimizes stress, allowing me to consistently perform at my best and contribute positively to the team.
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-wrapper" style="z-index: 10; position: absolute; transform: translateX(calc(100vw - 60px));">
+                    <div class="up-scroll">
+                        <div style="background-color: black; width: 5px; height: 25px; rotate: -45deg; position: absolute; transform: translate(10px, 30px);"></div>
+                        <div style="background-color: black; width: 5px; height: 25px; rotate: 45deg; position: absolute; transform: translate(20px, 0);"></div>
+                    </div>
+                    <div class="scroll-holder">
+                        <div class="scroll-bar">
+
+                        </div>
+                    </div>
+                    <div class="down-scroll">
+                        <div style="background-color: black; width: 5px; height: 25px; rotate: -45deg; position: absolute; transform: translate(0, 20px);"></div>
+                        <div style="background-color: black; width: 5px; height: 25px; rotate: 45deg; position: absolute; transform: translate(30px, -10px);"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="skills-theme" class="theme-window">
+                <div class="window-top">
+                    <div class="close-left">
+                    </div>
+                    <div class="close-right">
+                    </div>
+                    <div class="close-button">
+                        <div class="close-1"></div>
+                        <div class="close-2"></div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: centerd; justify-content: center; width: 100%; height: calc(100% - 70px);">
+                    <div id="skills-wrapper">
+                        <div class="skill-window">
+                            <div class="window-top" style="display: flex; align-items: center; justify-content: flex-end;">
+                                <div class="maximize-button">
+                                    <div class="maximize-1">
+                                        <div class="maximize-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: calc(100% - 70px);">
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                                    <div class="skills-hexagon" style="rotate: 45deg;">
+                                        <div style="position: absolute; width: 66%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px; display: flex; align-items: center; justify-content: center;">
+                                            <div style="width: 50%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px">
+                                            </div>
+                                        </div>
+                                        <div id="overlay1" class="skill-overlay" style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);">
+                                        </div>
+                                        <div style="position: absolute; width: calc(100% + 50px); height: calc(100% + 50px);">
+                                            <div class="round" style="bottom: 0; right: 0;">
+                                                <div class="round-hider">
+                                                    <div class="round-full-anim" style="height: 0; width: 50px; transform: translate(50px, 0px); display: flex; justify-content: center; align-items: center;">
+                                                        <div style="height: fit-content; width: 100%; transform: translateX(100%); display: flex; align-items: center;">
+                                                            <div style="white-space: nowrap;">
+                                                                Rape Power
+                                                            </div>
+                                                            <ul class="skill-description">
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="round" style="bottom: 0; justify-content: flex-end;">
+                                                <div class="round-hider" style="justify-content: flex-end;">
+                                                    <div class="round-full-anim" style="height: 0; width: 50px; transform: translate(-50px, 0px); display: flex; align-items: flex-start; justify-content: flex-end;">
+                                                        <div style="height: fit-content; width: fit-content; transform: translate(-50px, -8.8px); display: flex; align-items: center; flex-direction: column;">
+                                                            <div style="white-space: nowrap; display: inline-block">
+                                                                Rape Power
+                                                            </div>
+                                                            <ul class="skill-description">
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="round">
+                                                <div class="round-hider">
+                                                    <div class="round-full-anim" style="height: 0; width: 50px; transform: translate(50px, 0px); display: flex; justify-content: center; align-items: center;">
+                                                        <div style="height: fit-content; width: 100%; transform: translateX(100%); display: flex; align-items: center;">
+                                                            <div style="white-space: nowrap;">
+                                                                Rape Power
+                                                            </div>
+                                                            <ul class="skill-description">
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="round" style="right: 0">
+                                                <div class="round-hider">
+                                                    <div class="round-full-anim" style="height: 0; width: 20px; transform: translate(50px, 0px); display: flex; justify-content: center; align-items: center;">
+                                                        <div style="height: fit-content; width: 100%; transform: translateX(100%); display: flex; align-items: center;">
+                                                            <div style="white-space: nowrap;">
+                                                                Rape Power
+                                                            </div>
+                                                            <ul class="skill-description">
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                                <li>
+                                                                    mrooow
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-window">
+                            <div class="window-top" style="display: flex; align-items: center; justify-content: flex-end;">
+                                <div class="maximize-button">
+                                    <div class="maximize-1">
+                                        <div class="maximize-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: calc(100% - 70px);">
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                                    <div class="skills-hexagon" style="rotate: 45deg;">
+                                        <div style="position: absolute; width: 66%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px; display: flex; align-items: center; justify-content: center;">
+                                            <div style="width: 50%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px">
+                                            </div>
+                                        </div>
+                                        <div class="skill-overlay" style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-window">
+                            <div class="window-top" style="display: flex; align-items: center; justify-content: flex-end;">
+                                <div class="maximize-button">
+                                    <div class="maximize-1">
+                                        <div class="maximize-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: calc(100% - 70px);">
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                                    <div class="skills-hexagon" style="rotate: 45deg;">
+                                        <div style="position: absolute; width: 66%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px; display: flex; align-items: center; justify-content: center;">
+                                            <div style="width: 50%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px">
+                                            </div>
+                                        </div>
+                                        <div class="skill-overlay" style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="projects-theme" class="theme-window">
+                <div class="window-top">
+                    <div class="close-left">
+                    </div>
+                    <div class="close-right">
+                    </div>
+                    <div class="close-button">
+                        <div class="close-1"></div>
+                        <div class="close-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let main = document.querySelector("#main")
+        let background = document.querySelector("#background-load-video")
+        let worldBackground = document.querySelector("#background")
+        let loadWrapper = document.querySelector("#loading-wrapper")
+        let loadingTextDiv = document.querySelector("#loading-text")
+        let loadBar = document.querySelector("#loader")
+        let themesWrapper = document.querySelector("#themes-wrapper")
+        let whoTheme = document.querySelector("#who-theme")
+        let skillsTheme = document.querySelector("#skills-theme")
+        let projectsTheme = document.querySelector("#projects-theme")
+        let loadCount = 0
+        let loadCountText = 0
+
+        let intervals = {}
+
+        let skillOverlays = document.querySelectorAll(".skill-overlay")
+        let skillOverlaysPercentage = [["90% 90%", "20% 80%", "40% 40%", "70% 30%"], ["90% 90%", "30% 70%", "30% 30%", "70% 30%"], ["90% 90%", "30% 70%", "30% 30%", "70% 30%"]]
+
+        // Extra loading //
+
+        let skillCircles = document.querySelectorAll(".round")
+        let count = 0
+        for (let i = 0; i < skillCircles.length; i++) {
+            let ratio = 1
+            if (count == skillOverlaysPercentage[count].length) {
+                count++
+            }
+
+            let pos1 = parseInt(skillOverlaysPercentage[count][i].slice(0, 2))
+            let pos2 = parseInt(skillOverlaysPercentage[count][i].slice(4, 6))
+
+            let newpos1 = pos1 > 50 ? 100 - pos1 : pos1
+            let newpos2 = pos2 > 50 ? 100 - pos2 : pos2
+
+            let degrees = Math.atan(newpos1/newpos2) * (180 / Math.PI) - 90
+
+            if (pos1 < 50 && pos2 > 50) {
+                degrees += 90
+            }
+
+            if (pos1 < 50 && pos2 < 50) {
+                degrees += 180
+            }
+
+            if (pos1 > 50 && pos2 < 50) {
+                degrees += 270
+            }
+
+            skillCircles[i].addEventListener("mouseover", () => {
+                let goal = skillOverlaysPercentage[count].slice()
+                goal[i] = `${ pos1 + newpos2/newpos1 * (pos1 > 50 ? 10 : -10)}% ${pos2 + newpos1/newpos2 * (pos2 > 50 ? 10 : -10)}%`
+                skillOverlays[count].style.clipPath = `polygon(${goal.join(", ")})`
+
+                
+                skillOverlays[count].style.setProperty('--gradrot', `${degrees}deg`)
+                skillOverlays[count].style.setProperty('--gradcol', 'rgba(233, 233, 233, 0.9)')
+            })
+            skillCircles[i].addEventListener("mouseout", () => {
+                skillOverlays[count].style.clipPath = `polygon(${skillOverlaysPercentage[count].join(", ")})`
+                skillOverlays[count].style.setProperty('--gradcol', 'rgba(233, 233, 233, 0.3)')
+            })
+            skillCircles[i].addEventListener("click", () => {
+                skillCircles[i].querySelector(".skill-description").style.visibility = "visible"
+                skillCircles[i].querySelector(".skill-description").style.width = "100%"
+                skillCircles[i].querySelector(".round-hider").style.width = "500px"
+                setTimeout(() => {
+                    let listener = () => {
+                        skillCircles[i].querySelector(".skill-description").style.visibility = ""
+                        skillCircles[i].querySelector(".skill-description").style.width = ""
+                        skillCircles[i].querySelector(".round-hider").style.width = ""
+                        document.removeEventListener("click", listener)
+                    }
+                    document.addEventListener("click", listener)
+                }, 100)
+            })
+        }
+        delete skillCircles, count
+
+        ///////////////////
+
+        function loadInPage() {
+            setTimeout(() => {
+                if (loadCount % 8 === 0) {
+                    loadBar.innerHTML = ""
+                }
+                loadBar.innerHTML += "<div></div>"
+                loadCount++
+
+                //if (loadCount / 8 !== 2) {
+                if (false) {
+                    loadInPage()
+                } else {
+                    setTimeout(() => {
+                        clearInterval(intervals["screen1Load"])
+                        clearInterval(intervals["screen2Load"])
+                        background.pause()
+                        background.style.opacity = 0
+                        loadWrapper.style.opacity = 0
+                        main.style.opacity = 1
+                        setTimeout(() => {
+                            background.remove()
+                            loadWrapper.remove()
+                        }, 9000)
+                        setInterval(() => {
+                            let goalX = -X*0.1 + X/(window.innerWidth/60)
+                            let goalY = -Y*0.1 + Y/(window.innerWidth/60)
+                            worldBackground.style.transform = `translate(${goalX}px, ${goalY}px)`
+                            themesWrapper.style.transform = `translate(${goalX*1.7}px, ${goalY*1.7}px)`
+                        }, 50)
+                    }, 1000)   
+                }
+            }, 1000);
+        }
+        loadInPage()
+
+        function loadInPageText() {
+            setTimeout(() => {
+                if (loadCountText % 3 === 0) {
+                    loadingTextDiv.textContent = "Loading"
+                }
+                loadingTextDiv.textContent += "."
+                loadCountText++
+
+                if (loadCountText / 3 !== 16/3*2) {
+                    loadInPageText()
+                }
+            }, 500);
+        }
+        loadInPageText()
+        
+        function checkNegative(number) {
+            if (number < 0) {
+                return -1
+            } else {
+                return 1
+            }
+        }
+
+        function drawPolygon(ctx, sides, radius, color) {
+            if (sides < 3) {
+                throw new Error("A polygon must have at least 3 sides.");
+            }
+
+            const centerX = ctx.canvas.width / 2;
+            const centerY = ctx.canvas.height / 2;
+
+            const angleStep = (2 * Math.PI) / sides;
+
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const x = centerX + radius * Math.cos(i * angleStep);
+                const y = centerY + radius * Math.sin(i * angleStep);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
+
+        function drawCustomPolygon(ctx, sides, distances, color) {
+            if (sides < 3) {
+                throw new Error("A polygon must have at least 3 sides.");
+            }
+
+            const centerX = ctx.canvas.width / 2;
+            const centerY = ctx.canvas.height / 2;
+
+            if (distances.length !== sides) {
+                throw new Error("The distances array must have the same length as the number of sides.");
+            }
+
+            const angleStep = (2 * Math.PI) / sides;
+
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const x = centerX + distances[i] * Math.cos(i * angleStep);
+                const y = centerY + distances[i] * Math.sin(i * angleStep);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
+
+        function drawDonutPolygon(ctx, sides, outerRadius, innerRadius, color) {
+            if (sides < 3) {
+                throw new Error("A polygon must have at least 3 sides.");
+            }
+
+            const centerX = ctx.canvas.width / 2;
+            const centerY = ctx.canvas.height / 2;
+
+            const angleStep = (2 * Math.PI) / sides;
+
+            // Draw outer polygon
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const x = centerX + outerRadius * Math.cos(i * angleStep);
+                const y = centerY + outerRadius * Math.sin(i * angleStep);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            // Cut out inner polygon without affecting background
+            ctx.save();
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const x = centerX + innerRadius * Math.cos(i * angleStep);
+                const y = centerY + innerRadius * Math.sin(i * angleStep);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.fillStyle = "rgba(233, 233, 233, 0.885)"
+            ctx.fill();
+            ctx.restore();
+        }
+        `
+        drawPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, 74, "rgba(233, 233, 233, 0.185)")
+        drawDonutPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, 76, 74, "rgba(89, 89, 89, 0.885)")
+        drawDonutPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, 54, 52, "rgba(89, 89, 89, 0.885)")
+        drawDonutPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, 28, 26, "rgba(89, 89, 89, 0.885)")
+        drawCustomPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, [72, 50, 33, 40], "rgba(233, 233, 233, 0.485)")
+        `
+
+        let X, Y = 0
+        function updateScreenLoading() {
+            let goalX = X*0.1 + X/(window.innerWidth/60)
+            let goalY = Y*0.1 + Y/(window.innerWidth/60)
+            background.style.transform = `translate(${goalX}px, ${goalY}px)`
+        }
+
+        function updateScreenLoadingText() {
+            loadWrapper.style.transform = `translate(${X*0.1 + X/(window.innerWidth/30)}px, ${Y*0.1 + Y/(window.innerWidth/30)}px)`
+        }
+
+        intervals["screen1Load"] = setInterval(updateScreenLoading, 100);
+        intervals["screen2Load"] = setInterval(updateScreenLoadingText, 100);
+
+        let currentWindowTheme, currentScrollBar
+        currentWindowTheme = document.querySelector("#who-theme")
+
+        function scrollToBottom() {
+            var div = currentWindowTheme.querySelector(".inner-theme-scroll");
+            div.scrollBy({
+                top: 50,
+                behavior: 'smooth'
+            });
+        }
+        currentWindowTheme.querySelector(".down-scroll").addEventListener("click", scrollToBottom)
+
+        function scrollToTop() {
+            var div = currentWindowTheme.querySelector(".inner-theme-scroll");
+            div.scrollBy({
+                top: -50,
+                behavior: 'smooth'
+            });
+        }
+        currentWindowTheme.querySelector(".up-scroll").addEventListener("click", scrollToTop)
+        
+        function updateScrollBar() {
+            let maxHeight = window.innerHeight - 70
+            let height = currentWindowTheme.querySelector(".inner-theme-scroll").scrollHeight
+            currentWindowTheme.querySelector(".scroll-bar").style.height = `${maxHeight/height * 100}%`
+
+            var scrollTop = currentWindowTheme.querySelector(".inner-theme-scroll").scrollTop
+            var clientHeight = currentWindowTheme.querySelector(".inner-theme-scroll").clientHeight
+            var scrollPercent = (scrollTop / (height - clientHeight))
+
+            let targetscroll = Math.min(scrollPercent * currentWindowTheme.querySelector(".scroll-holder").clientHeight, currentWindowTheme.querySelector(".scroll-holder").clientHeight - currentWindowTheme.querySelector(".scroll-bar").clientHeight)
+            
+            console.log(targetscroll)
+            currentWindowTheme.querySelector(".scroll-bar").style.transform = `translateY(${targetscroll}px)`
+            
+        }
+
+        currentWindowTheme.querySelector(".inner-theme-scroll").addEventListener('scroll', updateScrollBar)
+
+        document.addEventListener('mousemove', (event) => { 
+            X = event.clientX - window.innerWidth/2
+            Y = event.clientY - window.innerHeight/2
+        });
+
+        [[document.querySelector("#who"), whoTheme], [document.querySelector("#skills"), skillsTheme], [document.querySelector("#projects"), projectsTheme]].forEach(element => {
+            element[0].addEventListener("mouseenter", () => {
+                let length = `${10+(element[0].querySelector(".theme-card-title").querySelector("div").getBoundingClientRect().width)}px`
+                element[0].querySelector(".theme-card-title").style.width = length
+            })
+            element[0].addEventListener("mouseleave", () => {
+                element[0].querySelector(".theme-card-title").style.width = "0px"
+            })
+            
+            element[0].addEventListener("click", () => {
+                element[1].style.width = "calc(100vw - 6px)"
+                element[1].style.height = "calc(100vh - 6px)"
+                element[1].style.transform = "translate(-1px, 0px)"
+                setTimeout(() => {
+                    updateScrollBar()
+                    let closeButton = element[1].querySelector(".close-button")
+                    element[1].querySelector(".close-left").addEventListener("mouseover", (event) => {
+                        console.log("cick")
+                        closeButton.style.transform = `translate(10px, 10px)`
+                    })
+                }, 500);
+            })
+        });
+
+        // Custom click events hookups
+        document.querySelector("#skills").addEventListener("click", () => {
+            for (let i = 0; i < skillOverlaysPercentage.length; i++) {
+                setTimeout(function() { 
+                    skillOverlays[i].style.clipPath = `polygon(${skillOverlaysPercentage[i].join(", ")})`
+                }, Math.random() * 400);
+            }
+        })
+        skillsTheme.querySelector(".close-button").addEventListener("click", () => {
+            for (let i = 0; i < skillOverlaysPercentage.length; i++) {
+                skillOverlays[i].style.clipPath = `polygon(${"50% 50%,".repeat(skillOverlaysPercentage[i].length).slice(0, -1)})`
+            }
+        })
+        //
+
+        document.querySelectorAll(".theme-window").forEach(element => {
+            let closeButton = element.querySelector(".close-button")
+            element.querySelector(".close-right").addEventListener("mouseover", (event) => {
+                console.log("cick")
+                closeButton.style.transform = `translate(calc(100vw - 70px), 10px)`
+            })
+            closeButton.addEventListener("click", () => {
+                element.style.width = "0px"
+                element.style.height = "0px"
+                element.style.transform = "translate(-1px, 10px)"
+                let newDiv = element.querySelector(".close-left").cloneNode(true)
+                element.querySelector(".close-left").parentNode.replaceChild(newDiv, element.querySelector(".close-left"))
+            })
+        });
+
+        let maximized = []
+
+        document.querySelectorAll(".skill-window").forEach(element => {
+            let maximizedPointer = maximized.length
+            maximized.push(false)
+            let button = element.querySelector(".maximize-button")
+
+            button.addEventListener("click", () => {
+                if (~maximized[maximizedPointer]) {
+                    document.querySelectorAll(".skill-window").forEach(e => {
+                        if (e !== element) {
+                            e.style.width = "10vw"
+                            e.querySelector(".maximize-button").querySelector(".maximize-2").style.width = "calc(100% - 8px)"
+                            e.querySelector(".maximize-button").querySelector(".maximize-2").style.height = "calc(100% - 8px)"
+                            e.querySelector(".maximize-button").querySelector(".maximize-2").style.transform = ""
+                        }
+                    });
+                    element.style.width = "79vw"
+                    button.querySelector(".maximize-2").style.width = "110%"
+                    button.querySelector(".maximize-2").style.height = "calc(101% - 4px)"
+                    button.querySelector(".maximize-2").style.transform = "translateY(-4px)"
+
+                    element.querySelectorAll(".round").forEach(round => {
+                        round.style.transition = "border cubic-bezier(0.075, 0.82, 0.165, 1) .65s, background-color cubic-bezier(0.075, 0.82, 0.165, 1) 1s"
+                        round.style.backgroundColor = "rgba(186, 186, 186, 0.95)"
+                        round.style.border = "rgb(183, 183, 183) solid 4px"
+                        setTimeout(() => {
+                            round.style.backgroundColor = ""
+                            round.style.border = ""
+                            round.style.transition = ""
+                        }, 1000)
+
+                    })
+                } else {
+                    document.querySelectorAll(".skill-window").forEach(e => {
+                        e.style.width = "calc(33vw - 10px)"
+                        e.querySelector(".maximize-button").querySelector(".maximize-2").style.width = "calc(100% - 8px)"
+                        e.querySelector(".maximize-button").querySelector(".maximize-2").style.height = "calc(100% - 8px)"
+                        e.querySelector(".maximize-button").querySelector(".maximize-2").style.transform = ""
+                    });
+                    button.querySelector(".maximize-2").style.width = "calc(100% - 8px)"
+                    button.querySelector(".maximize-2").style.height = "calc(100% - 8px)"
+                    button.querySelector(".maximize-2").style.transform = ""
+                }
+                let notMax = ~maximized[maximizedPointer]
+                maximized = [false, false, false]
+                maximized[maximizedPointer] = notMax
+            })
+
+        });
+        
+    </script>
+</body>
+</html>
