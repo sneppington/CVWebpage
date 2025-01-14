@@ -277,7 +277,9 @@ body::-webkit-scrollbar {
     border: 3px rgba(233, 233, 233, 0.885) solid;
     width: calc(33vw - 10px);
     height: 90%;
+    position: relative;
     overflow: hidden;
+    background-color: black;
     transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
 }
 
@@ -328,10 +330,11 @@ body::-webkit-scrollbar {
 }
 
 .skills-hexagon {
-    height: 50%;
+    height: min(calc(50%), calc(25% + 10vw));
+    flex-shrink: 0;
     aspect-ratio: 1 / 1;
     border: rgba(89, 89, 89, 0.895) solid 4px;
-    background-color: rgba(233, 233, 233, 0.071);
+    background-color: rgb(16, 16, 16);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -343,30 +346,109 @@ body::-webkit-scrollbar {
     background-position: 0% 0%;
     width: 100%;
     aspect-ratio: 1/1;
+    z-index: 1;
+}
+
+#skill-hex2-main {
+    height: calc(min(calc(50%), calc(25% + 10vw)) + 4px);
+    background-color: rgba(89, 89, 89, 0.895);
+    border: rgba(89, 89, 89, 0.895) solid 4px;
+    rotate: 45deg; 
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+#skill-hex2-main::after {
+    content: "";
+    z-index: 0;
+    position: absolute;
+    height: calc(100% - 2px);
+    aspect-ratio: 1 / 1;
+    background-color: rgb(16, 16, 16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+#skill-hex2-small {
+    position: absolute;
+    height: 66%;
+    z-index: 1;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(89, 89, 89, 0.895);
+    border: rgba(89, 89, 89, 0.895) solid 4px;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#skill-hex2-small::after {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    position: absolute;
+    height: calc(100% - 2px);
+    aspect-ratio: 1 / 1;
+    background-color: rgb(16, 16, 16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+#skill-hex2-smallest {
+    position: absolute;
+    height: 50%;
+    z-index: 2;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(89, 89, 89, 0.895);
+    border: rgba(89, 89, 89, 0.895) solid 4px;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#skill-hex2-smallest::after {
+    position: absolute;
+    content: "";
+    z-index: 2;
+    position: absolute;
+    height: calc(100% - 2px);
+    aspect-ratio: 1 / 1;
+    background-color: rgb(16, 16, 16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 }
 
 #overlay1 {
     --gradrot: 45deg;
     --gradcol: rgba(233, 233, 233, 0.3);
-    background: linear-gradient(var(--gradrot), var(--gradcol) 30%, rgba(233, 233, 233, 0.3) 70%);
+    --gradcolSec: rgba(233, 233, 233, 0.3);
+    background: linear-gradient(var(--gradrot), var(--gradcol), var(--gradcolSec));
 
-    transition: --gradrot cubic-bezier(0.075, 0.82, 0.165, 1) .5s, --gradcol cubic-bezier(0.075, 0.82, 0.165, 1) .8s, clip-path cubic-bezier(0.075, 0.82, 0.165, 1) .8s, background-position cubic-bezier(0.075, 0.82, 0.165, 1) .8s;
+    transition: --gradrot cubic-bezier(0.075, 0.82, 0.165, 1) .5s, --gradcol cubic-bezier(0.075, 0.82, 0.165, 1) .8s, --gradcolSec cubic-bezier(0.075, 0.82, 0.165, 1) .8s, clip-path cubic-bezier(0.075, 0.82, 0.165, 1) .8s, background-position cubic-bezier(0.075, 0.82, 0.165, 1) .8s;
 }
 
 #overlay2 {
-    --gradrot: 45deg;
+    --gradrot: 72deg;
     --gradcol: rgba(233, 233, 233, 0.3);
-    background: linear-gradient(var(--gradrot), var(--gradcol), rgba(233, 233, 233, 0.3));
+    --gradcolSec: rgba(233, 233, 233, 0.3);
+    background: linear-gradient(calc(var(--gradrot) + 36deg), var(--gradcolSec), var(--gradcol));
 
-    transition: --gradrot cubic-bezier(0.075, 0.82, 0.165, 1) .8s, --gradcol cubic-bezier(0.075, 0.82, 0.165, 1) .8s;
+    transition: --gradrot cubic-bezier(0.075, 0.82, 0.165, 1) .5s, --gradcol cubic-bezier(0.075, 0.82, 0.165, 1) .8s, --gradcolSec cubic-bezier(0.075, 0.82, 0.165, 1) .8s, clip-path cubic-bezier(0.075, 0.82, 0.165, 1) .8s, background-position cubic-bezier(0.075, 0.82, 0.165, 1) .8s;
 }
 
 #overlay3 {
     --gradrot: 45deg;
     --gradcol: rgba(233, 233, 233, 0.3);
-    background: linear-gradient(var(--gradrot), var(--gradcol), rgba(233, 233, 233, 0.3));
+    --gradcolSec: rgba(233, 233, 233, 0.3);
+    background: linear-gradient(var(--gradrot), var(--gradcol), var(--gradcolSec));
 
-    transition: --gradrot cubic-bezier(0.075, 0.82, 0.165, 1) .8s, --gradcol cubic-bezier(0.075, 0.82, 0.165, 1) .8s;
+    transition: --gradrot cubic-bezier(0.075, 0.82, 0.165, 1) .5s, --gradcol cubic-bezier(0.075, 0.82, 0.165, 1) .8s, --gradcolSec cubic-bezier(0.075, 0.82, 0.165, 1) .8s, clip-path cubic-bezier(0.075, 0.82, 0.165, 1) .8s, background-position cubic-bezier(0.075, 0.82, 0.165, 1) .8s;
 }
 
 .round {
@@ -384,45 +466,74 @@ body::-webkit-scrollbar {
     transition: border cubic-bezier(0.075, 0.82, 0.165, 1) .8s, background-color cubic-bezier(0.075, 0.82, 0.165, 1) 1.3s, color cubic-bezier(0.075, 0.82, 0.165, 1) 1.3s;
 }
 
-.round .round-full-anim {
-    border-bottom: rgba(133, 133, 133, 0.895) solid 4px;
-    transition: border cubic-bezier(0.075, 0.82, 0.165, 1) .8s;
-}
-
 .round:hover {
-    color: rgb(183, 183, 183);
     background-color: rgba(186, 186, 186, 0.95);
     border: rgb(183, 183, 183) solid 4px;
 }
 
-.round:hover .round-full-anim {
-    border-bottom: rgb(183, 183, 183) solid 4px;
+.round-hider {
+    height: 0;
+    width: 0;
+    overflow: hidden;
 }
 
-.round-hider {
-    height: 200px;
-    width: 0px;
+.skill-description-wrapper {
     display: flex;
     align-items: center;
-    flex-shrink: 0;
     overflow-x: hidden;
-    transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+    flex-shrink: 0;
+    width: 0px;
+    height: fit-content;
+    pointer-events: none;
+    transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 1s; 
 }
 
-.round:hover .round-hider {
-    width: 300px;
+#hover-window-wrapper {
+    position: absolute;
+    width: 100vw;
+    height: 100vw;
+    z-index: 10;
+    background: none;
+    pointer-events: none;
+}
+
+#hover-skill-window{
+    --offsetX: 0%;
+    transform: translateX(var(--offsetX));
+    position: absolute;
+    width: fit-content;
+    max-width: 70vw;    
+    height: fit-content;
+    z-index: 10;
+    color: rgb(183, 183, 183);
+    padding: 10px;
+    background-color: black;
+    border: 3px rgba(233, 233, 233, 0.885) solid;
+}
+
+.skill-title {
+    white-space: nowrap;
+    font-size:  min(1.2vw, 19px);
 }
 
 .skill-description {
     overflow: visible;
     font-size: small;
-    visibility: hidden;
-    width: 0px;
-    transition: width cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+    width: 20vw;
+    height: fit-content;
+    list-style-type: none;
 }
 
 .skill-description li {
+    font-size: min(1vw, 15px);
     padding: 5px;
+    border-left: 3px rgba(133, 133, 133, 0.895) solid;
+}
+
+.offsetX, .offsetY {
+    width: 0;
+    height: 0;
+    overflow: hidden;
 }
 
 @media (max-width: 1000px) {
