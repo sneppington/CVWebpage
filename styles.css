@@ -9,6 +9,11 @@
     initial-value: rgba(233, 233, 233, 0.3);
 }
 
+@font-face {
+    font-family: 'SquaredFont';
+    src: url('./Storage/fonts/UssDallasTitle-R9vlo.otf') format('truetype');
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -24,11 +29,6 @@ body::-webkit-scrollbar {
 /* Hide scrollbar for other elements */
 ::-webkit-scrollbar {
     display: none;
-}
-
-@font-face {
-    font-family: 'SquaredFont';
-    src: url('./Storage/fonts/UssDallasTitle-R9vlo.otf') format('truetype');
 }
 
 #main {
@@ -283,12 +283,22 @@ body::-webkit-scrollbar {
     transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
 }
 
+.skills-name {
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    color: black;
+    font-size: larger;
+    font-weight: bolder;
+    margin: 10px;
+}
+
 .maximize-button {
     position: absolute;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
     margin-right: 10px;
     width: 50px;
     height: 50px;
@@ -534,6 +544,38 @@ body::-webkit-scrollbar {
     width: 0;
     height: 0;
     overflow: hidden;
+}
+
+#searcher-projects {
+    position: absolute;
+    width: calc(100% - 70px);
+    height: 65px;
+    margin: 2.5px;
+    display: flex;
+    align-items: center;
+}
+
+#searcher-projects-input-field {
+    height: 40px;
+    width: min(350px, 50vw);
+    border-radius: 0px;
+    margin-left: 2px;
+    background-color: black;
+    color: rgba(233, 233, 233, 0.885);
+    font-family: 'SquaredFont', sans-serif;
+    font-size: 13px;
+    transition: font-size cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s, width cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s, border-radius cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
+}
+
+#searcher-projects-input-field::placeholder {
+    color: rgba(133, 133, 133, 0.895);
+    opacity: 1;
+}
+
+#searcher-projects-input-field:focus {
+    border-radius: 5px;
+    width: min(450px, 60vw);
+    font-size: 16px;
 }
 
 @media (max-width: 1000px) {
