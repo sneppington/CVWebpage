@@ -211,7 +211,10 @@
                 <div style="display: flex; align-items: centerd; justify-content: center; width: 100%; height: calc(100% - 70px);">
                     <div id="skills-wrapper">
                         <div class="skill-window">
-                            <div class="window-top" style="display: flex; align-items: center; justify-content: flex-end;">
+                            <div class="window-top" style="display: flex; align-items: center; justify-content: space-between;">
+                                <div class="skills-name">
+                                    Technical Skills
+                                </div>
                                 <div class="maximize-button">
                                     <div class="maximize-1">
                                         <div class="maximize-2"></div>
@@ -284,7 +287,10 @@
                             </div>
                         </div>
                         <div class="skill-window">
-                            <div class="window-top" style="display: flex; align-items: center; justify-content: flex-end;">
+                            <div class="window-top" style="display: flex; align-items: center; justify-content: space-between;">
+                                <div class="skills-name">
+                                    Soft Skills
+                                </div>
                                 <div class="maximize-button">
                                     <div class="maximize-1">
                                         <div class="maximize-2"></div>
@@ -365,7 +371,10 @@
                             </div>
                         </div>
                         <div class="skill-window">
-                            <div class="window-top" style="display: flex; align-items: center; justify-content: flex-end;">
+                            <div class="window-top" style="display: flex; align-items: center; justify-content: space-between;">
+                                <div class="skills-name">
+                                    Other Skills
+                                </div>
                                 <div class="maximize-button">
                                     <div class="maximize-1">
                                         <div class="maximize-2"></div>
@@ -444,9 +453,8 @@
             </div>
             <div id="projects-theme" class="theme-window">
                 <div class="window-top">
-                    <div class="close-left">
-                    </div>
-                    <div class="close-right">
+                    <div id="searcher-projects">
+                        <input id="searcher-projects-input-field" placeholder="Search for a project">
                     </div>
                     <div class="close-button">
                         <div class="close-1"></div>
@@ -812,14 +820,16 @@
                 element[1].style.width = "calc(100vw - 6px)"
                 element[1].style.height = "calc(100vh - 6px)"
                 element[1].style.transform = "translate(-1px, 0px)"
-                setTimeout(() => {
-                    updateScrollBar()
-                    let closeButton = element[1].querySelector(".close-button")
-                    element[1].querySelector(".close-left").addEventListener("mouseover", (event) => {
-                        console.log("cick")
-                        closeButton.style.transform = `translate(10px, 10px)`
-                    })
-                }, 500);
+                if (element[1].querySelector(".close-left")) {
+                    setTimeout(() => {
+                        updateScrollBar()
+                        let closeButton = element[1].querySelector(".close-button")
+                        element[1].querySelector(".close-left").addEventListener("mouseover", (event) => {
+                            console.log("cick")
+                            closeButton.style.transform = `translate(10px, 10px)`
+                        })
+                    }, 500);
+                }
             })
         });
 
@@ -840,10 +850,12 @@
 
         document.querySelectorAll(".theme-window").forEach(element => {
             let closeButton = element.querySelector(".close-button")
-            element.querySelector(".close-right").addEventListener("mouseover", (event) => {
-                console.log("cick")
-                closeButton.style.transform = `translate(calc(100vw - 70px), 10px)`
-            })
+            if (element.querySelector(".close-right")) {
+                element.querySelector(".close-right").addEventListener("mouseover", (event) => {
+                    console.log("cick")
+                    closeButton.style.transform = `translate(calc(100vw - 70px), 10px)`
+                })
+            }
             closeButton.addEventListener("click", () => {
                 element.style.width = "0px"
                 element.style.height = "0px"
