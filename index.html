@@ -1,246 +1,909 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Línea del Tiempo de Filósofos</title>
-    <style>
-        body, html {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: none; /* Set a default background */
-        }
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-            z-index: 0;
-        }
-        .line {
-            position: absolute;
-            width: 6px;
-            background-color: #bbb;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-	        z-index: -1;
-        }
-        .container {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-        .container.left {
-            left: -9.1%;
-        }
-        .container.right {
-            left: 50%;
-        }
-        .container::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -17px;
-            background-color: #bbb;
-            border: 4px solid #fff;
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-        .right::after {
-            left: -17px;
-        }
-        .content {
-            padding: 20px;
-            background-color: white;
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-        .content h3 {
-            margin-top: 0;
-        }
-        .epoch {
-            text-align: center;
-            font-size: 1.8em;
-            font-weight: bold;
-            margin: 30px 0;
-            color: #333;
-	    z-index: 10;
-        }
-        .context {
-            font-style: italic;
-	    font-size: 1.3em;
-            margin: 10px 0;
-            text-align: center;
-            color: #555;
-            z-index: 10;
-        }
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle, rgba(255, 182, 193, 0.7), rgba(255, 255, 255, 0.5)); /* Soft pink to white gradient */
-            background-repeat: repeat-y; /* Repeat vertically */
-            filter: blur(20px); /* Apply the blur effect */
-            z-index: -1; /* Make sure it stays behind any other content */
-        }
-        .era-wrapper {
-            background-color: #fff; 
-            border-radius: 10px; 
-            width: fit-content; 
-            height: fit-content;
-            margin: 80px;
-            padding: 10px;
-            padding-top: 5px;
-        }
-    </style>
+    <title>Main Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-<div class="background"></div>
-<div class="background" style="transform: translateY(100%);"></div>
-<div class="background" style="transform: translateY(200%);"></div>
-<div class="background" style="transform: translateY(300%);"></div>
-<div class="background" style="transform: translateY(400%);"></div>
-<div class="background" style="transform: translateY(500%);"></div>
-<div class="background" style="transform: translateY(600%);"></div>
-<div class="timeline" style="transform: translateY(60%);">
-    <div class="line">
-    </div>
-
-    <!-- Edad Media -->
-    <div class ="era-wrapper">
-        <div class="epoch">Edad Media (Siglos V al XV)</div>
-        <div class="context">
-            La Edad Media se caracteriza por la caida del Imperio Romano y la consolidación del cristianismo como fuerza cultural dominante. Fue una época de grandes transformaciones políticas y sociales, dominada por el feudalismo, el auge de las universidades y el cruce entre la religión y la filosofía. Canarias, por su parte, estuvo dominada por los guanches hasta su incorporación al reino de Castilla en el siglo XV.
+<body style="font-family: 'SquaredFont'">
+    <img src="Storage/overlay.png" style="pointer-events: none; position: absolute; width: 100vw; height: 100vh; object-fit: fill; opacity: 0.1; z-index: 1;">
+    <div style="pointer-events: none; display: flex; align-items: center; justify-content: center; width: 100%; height: 100vh; position: absolute; overflow: hidden;">
+        <video id="background-load-video" autoplay muted loop>
+            <source src="Storage/Vids/vecteezy_the-black-screen-vcr-distortion-effect_28001043.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+        <div id="loading-wrapper">
+            <span id="loading-text" style="font-family: 'SquaredFont'; color: rgba(233, 233, 233, 0.885); margin-bottom: 1vw; font-size: calc(15px + 1vw * 0.5);">
+                Loading
+            </span>
+            <div id="loader">
+            </div>
         </div>
     </div>
+    <div id="main">
+        <div style="pointer-events: none; display: flex; align-items: center; justify-content: center; width: 100vw; height: 100vh; position: absolute;">
+            <video id="background" autoplay muted loop>
+                <source src="Storage/Vids/stock-footage-wireframe-sphere-computer-generated-d-render.webm" type="video/mp4">
+            </video>
+        </div>
+        <div id="themes-wrapper">
+            <div style="display: flex; flex-direction: column; gap: 10vh; align-items: center; justify-content: center; position: absolute; width: 100vw; height: 100vh;">
+                <div id="who" class="theme-card" style="transform: translate(-15vw, 0px); position: relative;">
+                    <div class="theme-card-title">
+                        <div style="white-space: nowrap; width: auto; margin: 5px;">
+                            <b>Who</b>
+                        </div>
+                    </div>
+                    <img src="Storage/userIcon.svg" style="width: 100%; height: 100%;">
+                </div>
+                <div id="skills" class="theme-card" style="transform: translate(18vw, -20px); position: relative;">
+                    <div class="theme-card-title">
+                        <div style="white-space: nowrap; width: auto; margin: 5px;">
+                            <b>Skills</b>
+                        </div>
+                    </div>
+                    <svg style="width: 100%; height: 100%;" fill="rgba(233, 233, 233, 0.885)" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 172 260" enable-background="new 0 0 172 260" xml:space="preserve">
+                    <path d="M45.999,210h80v15.917h-80V210z M97.999,258h-24c-8.837,0-16-7.163-16-16v-4h56v4C113.999,250.837,106.836,258,97.999,258z
+                        M83.973,2.024C38.1,3.104,1.263,41.516,2.011,87.395c0.353,21.69,8.928,41.381,22.743,56.093
+                        c13.44,14.314,21.245,33.004,21.245,52.64v1.789h34V128h-16v-12h44v12h-16v69.917h34v-1.793c0-19.601,7.746-38.292,21.18-52.566
+                        c14.15-15.034,22.82-35.283,22.82-57.558C169.999,38.935,131.291,0.91,83.973,2.024z"/>
+                    </svg>
+                </div>
+                <div id="projects" class="theme-card" style="transform: translate(-11vw, 30px); position: relative;">
+                    <div class="theme-card-title">
+                        <div style="white-space: nowrap; width: auto; margin: 5px;">
+                            <b>Projects</b>
+                        </div>
+                    </div>
+                    <img src="Storage/folderSvg.svg" style="width: 90%; height: 90%; margin: 5%;">
+                </div>
+            </div>
+        </div>
+        <div class="window-border">
+        </div>
+        <div style="display: flex; align-items: flex-end; justify-content: center; width: 100vw; height: 100vh;">
+            <div id="who-theme" class="theme-window">
+                <div class="window-top">
+                    <div class="close-left">
+                    </div>
+                    <div class="close-right">
+                    </div>
+                    <div class="close-button">
+                        <div class="close-1"></div>
+                        <div class="close-2"></div>
+                    </div>
+                </div>
+                <div class="inner-theme-scroll" style="height: calc(100% - 70px); width: 100vw; overflow-y: scroll; position: absolute;">
+                    <div style="margin-top: 30px; margin-left: 10vw; margin-right: 17vw; font-family: SquaredFont;">
+                        <div style="width: 100%; display: flex;">
+                            <div>
+                                <div id="photography">
+                                </div>
+                                <div style="font-size: large;">
+                                    Victor Churruca
+                                </div>
+                            </div>
+                            <div style="margin-left: 1vw; display: flex; flex-direction: column;">
+                                <div style="font-size: min(50px, 5vw);">
+                                    <b>Who am I</b>
+                                </div>
+                                <div>
+                                    I am a passionate frontend developer with a strong focus on creating unique and engaging web experiences. 
+                                    <br>With over four years of daily coding experience, I thrive in turning creative ideas into functional designs using the usual technologies of the sector.
+                                    <br>In addition to web development, I have collaborated on game development projects with teams, honing my skills in teamwork, communication, and meeting tight deadlines. 
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Technical Skills
+                            </div>
+                            <span style="color: rgba(136, 157, 225, 0.885);">Coding Experience:</span> 4 years of daily coding practice.<br><br>
+                            <span class="strong-yellow">Languages & Frameworks:</span>
+                            <ul>
+                                <li><span class="yellow">Lua:</span> Initial experience in game development.</li>
+                                <li><span class="yellow">Python:</span> Utilized for data analysis with tools like SQL and Pandas.</li>
+                                <li><span class="yellow">JavaScript:</span> Advanced knowledge and practical experience.</li>
+                                <li><span class="yellow">React:</span> Basic proficiency with practical applications.</li>
+                            </ul><br>
+                            <span class="strong-yellow">Web Development:</span>
+                            <ul>
+                                <li><span class="yellow">HTML:</span> Strong proficiency.</li>
+                                <li><span class="yellow">CSS:</span> Strong proficiency.</li>
+                                <li><span class="yellow">JavaScript:</span> Strong proficiency.</li>
+                            </ul>
+                            <br><br>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Professional Experience
+                            </div>
+                            <ul>
+                                <li>
+                                    <span class="yellow">Volunteer Programmer:</span> Developed a mobile app for a team competition under a tight schedule.
+                                </li>
+                                <li>
+                                    <span class="yellow">IT Department Coordinator:</span> Managed and coordinated the IT department for a group of over 80 members.
+                                </li>
+                                <li>
+                                    <span class="yellow">Volunteer Scripter:</span> Collaborated with designers at a game development studio, working under strict deadlines.
+                                </li>
+                                <li>
+                                    <span class="yellow">Mentorship:</span> Integrated a junior developer into the project, providing guidance and support.
+                                </li>
+                            </ul>
+                            <br><br>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Achievements
+                            </div>
+                            <ul>
+                                <li>
+                                    <span class="yellow">National Contest Qualification:</span> Developed an app that enabled our team to advance to the national level of a prestigious competition.
+                                </li>
+                                <li>
+                                    <span class="yellow">Language Proficiency:</span> Achieved a C1 level in English (native Spanish speaker).
+                                </li>
+                                <li>
+                                    <span class="yellow">Certification:</span> Google Sheets certified by Google.
+                                </li>
+                            </ul>
+                            <br><br>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Key Skills
+                            </div>
+                            <ul>
+                                <li>
+                                    <span class="yellow">Problem-Solving:</span> Employers value candidates who can find innovative solutions to challenges, especially in a fast-paced development environment.
+                                </li>
+                                <li>
+                                    <span class="yellow">Teamwork:</span> The ability to collaborate effectively with other developers, designers, and stakeholders is crucial for most projects.
+                                </li>
+                                <li>
+                                    <span class="yellow">Communication:</span> Clear and effective communication is essential for working with team members and understanding project requirements.
+                                </li>
+                                <li>
+                                    <span class="yellow">Adaptability:</span> The tech industry evolves rapidly, so being able to quickly learn and adapt to new technologies and methodologies is a key asset.
+                                </li>
+                                <li>
+                                    <span class="yellow">Time Management:</span> Being able to manage your time effectively and meet deadlines is important in delivering projects successfully.
+                                </li>
+                                <li>
+                                    <span class="yellow">Attention to Detail:</span> Ensuring your code is clean, functional, and user-friendly requires a keen eye for detail.
+                                </li>
+                            </ul>
+                            <br><br>
+                            <div style="font-size: 20px; margin-bottom: 10px;">
+                                Career Goals
+                            </div>
+                            I am seeking a stable and fulfilling job where I can leverage my frontend development skills to create engaging web experiences. I value a work environment that promotes a healthy work-life balance and minimizes stress, allowing me to consistently perform at my best and contribute positively to the team.
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-wrapper" style="z-index: 10; position: absolute; transform: translateX(calc(100vw - 60px));">
+                    <div class="up-scroll">
+                        <div style="background-color: black; width: 5px; height: 25px; rotate: -45deg; position: absolute; transform: translate(10px, 30px);"></div>
+                        <div style="background-color: black; width: 5px; height: 25px; rotate: 45deg; position: absolute; transform: translate(20px, 0);"></div>
+                    </div>
+                    <div class="scroll-holder">
+                        <div class="scroll-bar">
 
-    <div class="container left">
-        <div class="content">
-            <h3>San Agustín de Hipona (354-430)</h3>
-            <p>San Agustín fue uno de los filósofos más influyentes del cristianismo. Su obra *Confesiones* es un relato autobiográfico donde reflexiona sobre el pecado y la gracia divina. En su obra *La Ciudad de Dios*, examina la relación entre la Iglesia y el Estado, argumentando que la verdadera "ciudad de Dios" es un reino espiritual que trasciende lo terrenal. Agustín influyó profundamente en la filosofía medieval al integrar el pensamiento platónico con la teología cristiana.</p>
+                        </div>
+                    </div>
+                    <div class="down-scroll">
+                        <div style="background-color: black; width: 5px; height: 25px; rotate: -45deg; position: absolute; transform: translate(0, 20px);"></div>
+                        <div style="background-color: black; width: 5px; height: 25px; rotate: 45deg; position: absolute; transform: translate(30px, -10px);"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="skills-theme" class="theme-window">
+                <div class="window-top">
+                    <div class="close-left">
+                    </div>
+                    <div class="close-right">
+                    </div>
+                    <div class="close-button">
+                        <div class="close-1"></div>
+                        <div class="close-2"></div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: centerd; justify-content: center; width: 100%; height: calc(100% - 70px);">
+                    <div id="skills-wrapper">
+                        <div class="skill-window">
+                            <div class="window-top" style="display: flex; align-items: center; justify-content: flex-end;">
+                                <div class="maximize-button">
+                                    <div class="maximize-1">
+                                        <div class="maximize-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: calc(100% - 70px);">
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                                    <div class="skills-hexagon" style="rotate: 45deg;">
+                                        <div style="position: absolute; width: 66%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px; display: flex; align-items: center; justify-content: center;">
+                                            <div style="width: 50%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px">
+                                            </div>
+                                        </div>
+                                        <div id="overlay1" class="skill-overlay" style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);">
+                                        </div>
+                                        <div style="position: absolute; width: calc(100% + 50px); height: calc(100% + 50px); z-index: 1;">
+                                            <div class="round" style="right: 0; bottom: 0;">
+                                                <div class="round-hider">
+                                                    <div class="skill-title">
+                                                        JavaScript
+                                                    </div>
+                                                    <ul class="skill-description">
+                                                        <li>Solid understanding on computing</li>
+                                                        <li>Plethora of experience coding</li>
+                                                        <li>Need to learn more in and outs of it</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="round" style="left: 0; bottom: 0;">
+                                                <div class="round-hider">
+                                                    <div class="skill-title">
+                                                        HTML/CSS
+                                                    </div>
+                                                    <ul class="skill-description">
+                                                        <li>Solid knowledge and experience</li>
+                                                        <li>Understanding of dynamic layouts</li>
+                                                        <li>Long-term familiarity with it</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="round" style="left: 0; top: 0;">
+                                                <div class="round-hider">
+                                                    <div class="skill-title">
+                                                        React
+                                                    </div>
+                                                    <ul class="skill-description">
+                                                        <li>Knowledge of its basics</li>
+                                                        <li>Limited experience</li>
+                                                        <li>Few projects</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="round" style="right: 0; top: 0;">
+                                                <div class="round-hider">
+                                                    <div class="skill-title">
+                                                        GitHub
+                                                    </div>
+                                                    <ul class="skill-description">
+                                                        <li>Know basic functions</li>
+                                                        <li>Limited experience</li>
+                                                    </ul>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-window">
+                            <div class="window-top" style="display: flex; align-items: center; justify-content: flex-end;">
+                                <div class="maximize-button">
+                                    <div class="maximize-1">
+                                        <div class="maximize-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: calc(100% - 70px);">
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                                    <div id="skill-hex2-main" class="skills-hexagon">
+                                        <div id="skill-hex2-small" style="transform: translateY(5%);">
+                                            <div id="skill-hex2-smallest" style="transform: translateY(5%);">
+                                            </div>
+                                        </div>
+                                        <div id="overlay2" class="skill-overlay" style="clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);">
+                                        </div>
+                                    </div>
+                                    <div id="hex2-buttons" style="position: absolute; aspect-ratio: 1/1; rotate: 45deg; z-index: 1;">
+                                        <div class="round" style="left: calc(50% - 25px); top: 0">
+                                            <div class="round-hider">
+                                                <div class="skill-title">
+                                                    Communication
+                                                </div>
+                                                <ul class="skill-description">
+                                                    <li>Solid understanding on computing</li>
+                                                    <li>Plethora of experience coding</li>
+                                                    <li>Need to learn more in and outs of it</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="round" style="right: 0; top: calc(38% - 25px)">
+                                            <div class="round-hider">
+                                                <div class="skill-title">
+                                                    Problem-Solving
+                                                </div>
+                                                <ul class="skill-description">
+                                                    <li>I am profficient at finding ways to solve problems around me.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="round" style="left: calc(82% - 48px); bottom: 0;">
+                                            <div class="round-hider">
+                                                <div class="skill-title">
+                                                    Adaptability
+                                                </div>
+                                                <ul class="skill-description">
+                                                    <li></li>
+                                                    <li>I am used to picking up new skills on the move to be able of fullfilling the current goal</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="round" style="left: calc(18% - 25px); bottom: 0;">
+                                            <div class="round-hider">
+                                                <div class="skill-title">
+                                                    Time Management
+                                                </div>
+                                                <ul class="skill-description">
+                                                    <li>I see great value in one's own time.</li>
+                                                    <li>I write down the goals for the day, the week and the month.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="round" style="right: 1; top: calc(38% - 25px)">
+                                            <div class="round-hider">
+                                                <div class="skill-title">
+                                                    Creativity
+                                                </div>
+                                                <ul class="skill-description">
+                                                    <li>I strive for uniqueness</li>
+                                                </ul>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-window">
+                            <div class="window-top" style="display: flex; align-items: center; justify-content: flex-end;">
+                                <div class="maximize-button">
+                                    <div class="maximize-1">
+                                        <div class="maximize-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: calc(100% - 70px);">
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                                    <div class="skills-hexagon" style="rotate: 45deg;">
+                                        <div style="position: absolute; width: 66%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px; display: flex; align-items: center; justify-content: center;">
+                                            <div style="width: 50%; aspect-ratio: 1/1; border: rgba(89, 89, 89, 0.985) solid 4px">
+                                            </div>
+                                        </div>
+                                        <div id="overlay3" class="skill-overlay" style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);">
+                                        </div>
+                                        <div style="position: absolute; width: calc(100% + 50px); height: calc(100% + 50px); z-index: 1;">
+                                            <div class="round" style="right: 0; bottom: 0;">
+                                                <span class="offsetX">-100%</span>
+                                                <span class="offsetY">-100%</span>
+                                                <div class="round-hider">
+                                                    <div class="skill-title">
+                                                        SQL/Pandas
+                                                    </div>
+                                                    <ul class="skill-description">
+                                                        <li>Intermediate</li>
+                                                        <li>Much more experience with Pandas.</li>
+                                                        <li>I have used them on many data related projects.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="round" style="left: 0; bottom: 0;">
+                                                <span class="offsetX">-100%</span>
+                                                <div class="round-hider">
+                                                    <div class="skill-title">
+                                                        Python/LUA
+                                                    </div>
+                                                    <ul class="skill-description">
+                                                        <li>Main languages for the past 4 years.</li>
+                                                        <li>Have used them both on a daily basis.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="round" style="left: 0; top: 0;">
+                                                <span class="offsetX">-100%</span>
+                                                <div class="round-hider">
+                                                    <div class="skill-title">
+                                                        Scikit-learn/TensorFlow
+                                                    </div>
+                                                    <ul class="skill-description">
+                                                        <li>Right between novice and intermediate.</li>
+                                                        <li>Used them on a few ML/AI projects.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="round" style="right: 0; top: 0;">
+                                                <span class="offsetX">-100%</span>
+                                                <div class="round-hider">
+                                                    <div class="skill-title">
+                                                        Trello
+                                                    </div>
+                                                    <ul class="skill-description">
+                                                        <li>Long term familiarity with it.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="projects-theme" class="theme-window">
+                <div class="window-top">
+                    <div class="close-left">
+                    </div>
+                    <div class="close-right">
+                    </div>
+                    <div class="close-button">
+                        <div class="close-1"></div>
+                        <div class="close-2"></div>
+                    </div>
+                </div>
+                <div style="width: 100%; height: 20%; display: flex; align-items: center; justify-content: center;">
+                    <div style="font-size: x-large;">
+                        Nothing to be seen here at the moment.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="container right">
-        <div class="content">
-            <h3>Santo Tomás de Aquino (1225-1274)</h3>
-            <p>Filósofo y teólogo italiano, Santo Tomás es conocido por integrar la filosofía aristotélica con la doctrna cristiana. Su obra *Summa Theologica* es uno de los pilares del pensamiento escolástico, donde explica la existencia de Dios y la naturaleza de la ética cristiana. Aquino defendió que la razón y la fe no son contradictorias, sino complementarias, y que la razón humana puede llegar a conocer la verdad de Dios, aunque la revelación divina es superior.</p>
-        </div>
+    <div id="hover-window-wrapper">
     </div>
+    <script>
+        let main = document.querySelector("#main")
+        let background = document.querySelector("#background-load-video")
+        let worldBackground = document.querySelector("#background")
+        let loadWrapper = document.querySelector("#loading-wrapper")
+        let loadingTextDiv = document.querySelector("#loading-text")
+        let loadBar = document.querySelector("#loader")
+        let themesWrapper = document.querySelector("#themes-wrapper")
+        let whoTheme = document.querySelector("#who-theme")
+        let skillsTheme = document.querySelector("#skills-theme")
+        let projectsTheme = document.querySelector("#projects-theme")
+        let loadCount = 0
+        let loadCountText = 0
 
-    <div class="container left">
-        <div class="content">
-            <h3>Averroes (1126-1198)</h3>
-            <p>Averroes, conocido como "el comentador" de Aristóteles, fue un filósofo y médico andalusí. Su influencia en la filosofía medieval fue enorme, especialmente en la escolástica. En su obra *Tahafut al-Tahafut* (La incoherencia de la incoherencia), defiende la idea de que la razón y la revelación no son opuestas, lo que lo convirtió en una figura clave en el debate entre razón y fe en la Edad Media.</p>
-        </div>
-    </div>
+        let intervals = {}
 
-    <div class="container right">
-        <div class="content">
-            <h3>Hildegarda de Bingen (1098-1179)</h3>
-            <p>Abadesa y mística alemana, Hildegarda de Bingen es conocida por su enfoque integrador de la espiritualidad, la ciencia y la música. En su obra *Scivias* (Conozca los caminos), presenta sus visiones místicas, las cuales interpretó como revelaciones divinas. También escribió sobre medicina, botánica y música, y su contribución a la filosofía medieval es significativa por su enfoque holístico.</p>
-        </div>
-    </div>
+        let skillOverlays = document.querySelectorAll(".skill-overlay")
+        let skillOverlaysPercentage = [["90% 90%", "20% 80%", "40% 40%", "70% 30%"], ["50% 20%", "87.5% 41.5%", "76.6% 90%", "32.4% 85%", "5% 38.2%"], ["70% 70%", "10% 90%", "40% 40%", "80% 20%"]]
 
-    <div class="container left">
-        <div class="content">
-            <h3>Ramón Llull (1232-1316)</h3>
-            <p>Filósofo, teólogo y misionero mallorquín, Ramón Llull fue el precursor del pensamiento lógico en la Edad Media. Su obra *Ars Magna* busca establecer un sistema lógico y universal para demostrar la verdad cristiana mediante un proceso racional y simbólico. Llull también promovió el diálogo interreligioso, buscando acercar el cristianismo al islam y la judaísmo a través de la razón.</p>
-        </div>
-    </div>
+        // Extra loading //
 
-    <div class="container right">
-        <div class="content">
-            <h3>Antonio de Viana (1578-1650)</h3>
-            <p>Antonio de Viana fue un escritor y poeta canario, quien se destacó por su obra *Antigüedades de las Islas Afortunadas*. En este texto, Viana preservó las tradiciones y mitos guanches, el pueblo aborigen de Canarias, y plasmó una visión histórica de las islas antes de la llegada de los europeos. A través de su escritura, ayudó a mantener viva la memoria cultural canaria durante la colonización.</p>
-        </div>
-    </div>
+        const hex2 = document.querySelector("#skill-hex2-main")
+        const hex2Buttons = document.querySelector("#hex2-buttons")
+        function sizeUp() {
+            hex2Buttons.style.height = `${hex2.offsetHeight + 50}px`
+            requestAnimationFrame(sizeUp)
+        }
+        requestAnimationFrame(sizeUp)
 
-    <!-- Edad Moderna -->
-    <div class ="era-wrapper">
-    <div class="epoch">Edad Moderna (Siglos XV al XVIII)</div>
-    <div class="context">
-        Esta edad esta marcada por la expansion del Renacimiento, que recupera los valores de la Antigüedad clásica, y por la Revolución Científica, que cambia la concepción del mundo. Esta época también está marcada por el auge de los Estados-nación y la exploración del Nuevo Mundo. Canarias juega un papel importante durante esta época debido a su ubicación estratégica en las rutas comerciales atlánticas.
-    </div>
-    </div>
+        function createHoverWindow(content, id, offset) {
+            const hoverDiv = document.createElement("div")
+            hoverDiv.innerHTML = content
+            hoverDiv.id = id
+            hoverDiv.style.transform = `translate(${"X" in offset ? offset.X : 0}, ${"Y" in offset ? offset.Y : 0})`
 
-    <div class="container left">
-        <div class="content">
-            <h3>René Descartes (1596-1650)</h3>
-            <p>René Descartes, filósofo y matemático francés, es conocido como el padre del racionalismo. En su obra *Meditaciones Metafísicas*, Descartes se plantea la cuestión fundamental de la existencia, afirmando la celebre máxima "Cogito, ergo sum" ("Pienso, luego existo"). Descartes fue pionero en el desarrollo de la geometría analítica y buscó una base sólida para las ciencias a través del uso del método deductivo y la razón pura.</p>
-        </div>
-    </div>
+            document.body.querySelector("#hover-window-wrapper").appendChild(hoverDiv)
 
-    <div class="container right">
-        <div class="content">
-            <h3>Francis Bacon (1561-1626)</h3>
-            <p>Francis Bacon fue un filósofo y científico inglés, conocido por ser uno de los principales promotores del empirismo. En su obra *Novum Organum*, Bacon defiende un enfoque inductivo para la investigación científica, basado en la observación y la experimentación. Sus ideas influyeron en el desarrollo del método científico y la creación de la filosofía natural moderna.</p>
-        </div>
-    </div>
+            function onMouseMove(event) {
+                let { clientX, clientY } = event;
 
-    <div class="container left">
-        <div class="content">
-            <h3>Sor Juana Inés de la Cruz (1651-1695)</h3>
-            <p>Sor Juana fue una monja, escritora y filósofa novohispana, considerada una de las figuras literarias más importantes de América Latina. En su *Respuesta a Sor Filotea de la Cruz*, defendió el derecho de las mujeres a la educación y a la participación intelectual, desafiando las normas patriarcales de su tiempo. A través de su obra, abogó por la libertad de pensamiento y el conocimiento sin restricciones de género.</p>
-        </div>
-    </div>
+                hoverDiv.style.left = `${clientX}px`;
+                hoverDiv.style.top = `${clientY}px`;
+            }
+            document.addEventListener("mousemove", onMouseMove)
 
-    <div class="container right">
-        <div class="content">
-            <h3>Margaret Cavendish (1623-1673)</h3>
-            <p>Margaret Cavendish fue una filósofa, escritora y duquesa inglesa, conocida por sus escritos sobre filosofía natural y metafísica. En su obra *Observations upon Experimental Philosophy*, Cavendish defendió el valor de la experimentación científica, aunque también criticó el método experimental dominante de la época, argumentando que la naturaleza era un principio más profundo y misterioso.</p>
-        </div>
-    </div>
+            return {
+            "object": hoverDiv,
+            "destroy": () => {
+                hoverDiv.remove()
+                document.removeEventListener("mousemove", onMouseMove)
+            }}
+        }
 
-    <div class="container left">
-        <div class="content">
-            <h3>Blas Cabrera Felipe (1878-1945)</h3>
-            <p>Blas Cabrera Felipe fue un físico y filósofo canario conocido por sus estudios sobre electromagnetismo. Su trabajo *Tratado de Electricidad y Magnetismo* es un aporte importante a la ciencia y filosofía del siglo XX. Cabrera también fue un defensor del estudio racional de las ciencias físicas y su relación con la filosofía de la naturaleza.</p>
-        </div>
-    </div>
+        function setupSkillWindow(skillDefault, goals, window) {
 
-    <!-- Edad Contemporánea -->
-    <div class ="era-wrapper">
-    <div class="epoch">Edad Contemporánea (Siglo XIX en adelante)</div>
-    <div class="context">
-        La Edad Contemporánea se caracteriza por la Revolución Industrial, la expansión de la democracia y los derechos humanos, y la creación de teorías filosóficas que abordan los problemas de la modernidad. La influencia del pensamiento de la Ilustración y el cambio de paradigma en el conocimiento marcaron esta época.
-    </div>
-    </div>
+            let skillCircles = window.querySelectorAll(".round")
+            let skillOverlay = window.querySelector(".skill-overlay")
 
-    <div class="container right">
-        <div class="content">
-            <h3>Simone de Beauvoir (1908-1986)</h3>
-            <p>Simone de Beauvoir fue una filósofa y escritora francesa, considerada una de las principales figuras del feminismo moderno. En su obra *El segundo sexo*, deconstruye la opresión de las mujeres y argumenta que "no se nace mujer, sino que se llega a serlo". Esta obra es uno de los textos fundamentales para la teoría feminista contemporánea.</p>
-        </div>
-    </div>
+            for (let i = 0; i < skillCircles.length; i++) {
+                let pos1 = parseInt(skillDefault[i].slice(0, 2))
+                let pos2 = parseInt(skillDefault[i].slice(4, 6))
 
-    <div class="container left">
-        <div class="content">
-            <h3>Hannah Arendt (1906-1975)</h3>
-            <p>Filósofa y teórica política alemana, Arendt es conocida por su análisis del totalitarismo y la naturaleza del poder político. En *Los orígenes del totalitarismo*, analiza las raíces del totalitarismo en el siglo XX, enfocándose en el nazismo y el estalinismo. También exploró la importancia de la acción política y la libertad en su obra *La condición humana*.</p>
-        </div>
-    </div>
+                let newpos1 = pos1 > 50 ? 100 - pos1 : pos1
+                let newpos2 = pos2 > 50 ? 100 - pos2 : pos2
 
-    <div class="container right">
-        <div class="content">
-            <h3>Néstor Álamo (1906-1994)</h3>
-            <p>Néstor Álamo fue un escritor y filósofo canario que exploró la identidad cultural y las tradiciones de Canarias. A través de su trabajo filosófico, promovió la comprensión del pueblo canario y sus raíces, considerando la filosofía como un medio para preservar las tradiciones y el pensamiento crítico en las islas.</p>
-        </div>
-    </div>
+                let degrees = i * 360/skillCircles.length - 45
 
-</div>
+                let hoverWindow, destroyHoverWindow
 
+                let content = `${skillCircles[i].querySelector(".skill-title").innerHTML} ${skillCircles[i].querySelector(".skill-description").innerHTML}`
+
+                skillCircles[i].addEventListener("mouseover", () => {
+                    let goal = skillDefault.slice()
+                    goal[i] = goals[i]
+
+                    skillOverlay.style.clipPath = `polygon(${goal.join(", ")})`
+                })
+
+                skillCircles[i].addEventListener("mouseenter", () => {
+                    skillOverlay.style.setProperty('--gradrot', `${degrees}deg`)
+                    skillOverlay.style.setProperty('--gradcol', 'rgba(233, 233, 233, 0.9)')
+                    skillOverlay.style.setProperty('--gradcolSec', 'rgba(233, 233, 233, 0)')
+                    
+                    let hover = createHoverWindow(content, "hover-skill-window", {"X": skillCircles[i].querySelector(".offsetX") ? skillCircles[i].querySelector(".offsetX").textContent : "0", "Y": skillCircles[i].querySelector(".offsetY") ? skillCircles[i].querySelector(".offsetY").textContent : "0"})
+                    hoverWindow = hover.object
+                    destroyHoverWindow = hover.destroy
+                    delete hover
+                })
+
+                skillCircles[i].addEventListener("mouseout", () => {
+                    skillOverlay.style.clipPath = `polygon(${skillDefault.join(", ")})`
+                    skillOverlay.style.setProperty('--gradcol', 'rgba(233, 233, 233, 0.3)')
+                    skillOverlay.style.setProperty('--gradcolSec', 'rgba(233, 233, 233, 0.3)')
+                    destroyHoverWindow()
+                    destroyHoverWindow = () => {}
+                })
+            }
+        }
+        setupSkillWindow(["90% 90%", "20% 80%", "40% 40%", "70% 30%"], ["95% 95%", "10% 90%", "30% 30%", "80% 20%"], document.querySelectorAll(".skill-window")[0])
+        setupSkillWindow(["50% 20%", "87.5% 41.5%", "76.6% 90%", "32.4% 85%", "5% 38.2%"], ["50% 10%", "97.25% 39.29%", "82.14% 98.33%", "27.91% 93.93%", "0% 35.66%"], document.querySelectorAll(".skill-window")[1])
+        setupSkillWindow(["70% 70%", "10% 90%", "40% 40%", "80% 20%"], ["80% 80%", "0% 100%", "30% 30%", "90% 10%"], document.querySelectorAll(".skill-window")[2])
+
+        ///////////////////
+
+        function loadInPage() {
+            setTimeout(() => {
+                if (loadCount % 8 === 0) {
+                    loadBar.innerHTML = ""
+                }
+                loadBar.innerHTML += "<div></div>"
+                loadCount++
+
+                //if (loadCount / 8 !== 2) {
+                if (false) {
+                    loadInPage()
+                } else {
+                    setTimeout(() => {
+                        clearInterval(intervals["screen1Load"])
+                        clearInterval(intervals["screen2Load"])
+                        background.pause()
+                        background.style.opacity = 0
+                        loadWrapper.style.opacity = 0
+                        main.style.opacity = 1
+                        setTimeout(() => {
+                            background.remove()
+                            loadWrapper.remove()
+                        }, 9000)
+                        setInterval(() => {
+                            let goalX = -X*0.1 + X/(window.innerWidth/60)
+                            let goalY = -Y*0.1 + Y/(window.innerWidth/60)
+                            worldBackground.style.transform = `translate(${goalX}px, ${goalY}px)`
+                            themesWrapper.style.transform = `translate(${goalX*1.7}px, ${goalY*1.7}px)`
+                        }, 50)
+                    }, 1000)   
+                }
+            }, 1000);
+        }
+        loadInPage()
+
+        function loadInPageText() {
+            setTimeout(() => {
+                if (loadCountText % 3 === 0) {
+                    loadingTextDiv.textContent = "Loading"
+                }
+                loadingTextDiv.textContent += "."
+                loadCountText++
+
+                if (loadCountText / 3 !== 16/3*2) {
+                    loadInPageText()
+                }
+            }, 500);
+        }
+        loadInPageText()
+        
+        function checkNegative(number) {
+            if (number < 0) {
+                return -1
+            } else {
+                return 1
+            }
+        }
+
+        function drawPolygon(ctx, sides, radius, color) {
+            if (sides < 3) {
+                throw new Error("A polygon must have at least 3 sides.");
+            }
+
+            const centerX = ctx.canvas.width / 2;
+            const centerY = ctx.canvas.height / 2;
+
+            const angleStep = (2 * Math.PI) / sides;
+
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const x = centerX + radius * Math.cos(i * angleStep);
+                const y = centerY + radius * Math.sin(i * angleStep);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
+
+        function drawCustomPolygon(ctx, sides, distances, color) {
+            if (sides < 3) {
+                throw new Error("A polygon must have at least 3 sides.");
+            }
+
+            const centerX = ctx.canvas.width / 2;
+            const centerY = ctx.canvas.height / 2;
+
+            if (distances.length !== sides) {
+                throw new Error("The distances array must have the same length as the number of sides.");
+            }
+
+            const angleStep = (2 * Math.PI) / sides;
+
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const x = centerX + distances[i] * Math.cos(i * angleStep);
+                const y = centerY + distances[i] * Math.sin(i * angleStep);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
+
+        function drawDonutPolygon(ctx, sides, outerRadius, innerRadius, color) {
+            if (sides < 3) {
+                throw new Error("A polygon must have at least 3 sides.");
+            }
+
+            const centerX = ctx.canvas.width / 2;
+            const centerY = ctx.canvas.height / 2;
+
+            const angleStep = (2 * Math.PI) / sides;
+
+            // Draw outer polygon
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const x = centerX + outerRadius * Math.cos(i * angleStep);
+                const y = centerY + outerRadius * Math.sin(i * angleStep);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            // Cut out inner polygon without affecting background
+            ctx.save();
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const x = centerX + innerRadius * Math.cos(i * angleStep);
+                const y = centerY + innerRadius * Math.sin(i * angleStep);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.fillStyle = "rgba(233, 233, 233, 0.885)"
+            ctx.fill();
+            ctx.restore();
+        }
+        `
+        drawPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, 74, "rgba(233, 233, 233, 0.185)")
+        drawDonutPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, 76, 74, "rgba(89, 89, 89, 0.885)")
+        drawDonutPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, 54, 52, "rgba(89, 89, 89, 0.885)")
+        drawDonutPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, 28, 26, "rgba(89, 89, 89, 0.885)")
+        drawCustomPolygon(document.querySelector(".skills-hexagon").getContext("2d"), 4, [72, 50, 33, 40], "rgba(233, 233, 233, 0.485)")
+        `
+
+        let X, Y = 0
+        function updateScreenLoading() {
+            let goalX = X*0.1 + X/(window.innerWidth/60)
+            let goalY = Y*0.1 + Y/(window.innerWidth/60)
+            background.style.transform = `translate(${goalX}px, ${goalY}px)`
+        }
+
+        function updateScreenLoadingText() {
+            loadWrapper.style.transform = `translate(${X*0.1 + X/(window.innerWidth/30)}px, ${Y*0.1 + Y/(window.innerWidth/30)}px)`
+        }
+
+        intervals["screen1Load"] = setInterval(updateScreenLoading, 100);
+        intervals["screen2Load"] = setInterval(updateScreenLoadingText, 100);
+
+        let currentWindowTheme, currentScrollBar
+        currentWindowTheme = document.querySelector("#who-theme")
+
+        function scrollToBottom() {
+            var div = currentWindowTheme.querySelector(".inner-theme-scroll");
+            div.scrollBy({
+                top: 50,
+                behavior: 'smooth'
+            });
+        }
+        currentWindowTheme.querySelector(".down-scroll").addEventListener("click", scrollToBottom)
+
+        function scrollToTop() {
+            var div = currentWindowTheme.querySelector(".inner-theme-scroll");
+            div.scrollBy({
+                top: -50,
+                behavior: 'smooth'
+            });
+        }
+        currentWindowTheme.querySelector(".up-scroll").addEventListener("click", scrollToTop)
+        
+        function updateScrollBar() {
+            let maxHeight = window.innerHeight - 300
+            let height = currentWindowTheme.querySelector(".inner-theme-scroll").scrollHeight
+            currentWindowTheme.querySelector(".scroll-bar").style.height = `${maxHeight/height * 100}%`
+
+            var scrollTop = currentWindowTheme.querySelector(".inner-theme-scroll").scrollTop
+            var clientHeight = currentWindowTheme.querySelector(".inner-theme-scroll").clientHeight
+            var scrollPercent = (scrollTop / (height - clientHeight))
+
+            let targetscroll = Math.min(scrollPercent * currentWindowTheme.querySelector(".scroll-holder").clientHeight, currentWindowTheme.querySelector(".scroll-holder").clientHeight - currentWindowTheme.querySelector(".scroll-bar").clientHeight)
+            
+            console.log(targetscroll)
+            currentWindowTheme.querySelector(".scroll-bar").style.transform = `translateY(${targetscroll}px)`
+            
+        }
+
+        currentWindowTheme.querySelector(".inner-theme-scroll").addEventListener('scroll', updateScrollBar)
+
+        document.addEventListener('mousemove', (event) => { 
+            X = event.clientX - window.innerWidth/2
+            Y = event.clientY - window.innerHeight/2
+        });
+
+        [[document.querySelector("#who"), whoTheme], [document.querySelector("#skills"), skillsTheme], [document.querySelector("#projects"), projectsTheme]].forEach(element => {
+            element[0].addEventListener("mouseenter", () => {
+                let length = `${10+(element[0].querySelector(".theme-card-title").querySelector("div").getBoundingClientRect().width)}px`
+                element[0].querySelector(".theme-card-title").style.width = length
+            })
+            element[0].addEventListener("mouseleave", () => {
+                element[0].querySelector(".theme-card-title").style.width = "0px"
+            })
+            
+            element[0].addEventListener("click", () => {
+                element[1].style.width = "calc(100vw - 6px)"
+                element[1].style.height = "calc(100vh - 6px)"
+                element[1].style.transform = "translate(-1px, 0px)"
+                setTimeout(() => {
+                    updateScrollBar()
+                    let closeButton = element[1].querySelector(".close-button")
+                    element[1].querySelector(".close-left").addEventListener("mouseover", (event) => {
+                        console.log("cick")
+                        closeButton.style.transform = `translate(10px, 10px)`
+                    })
+                }, 500);
+            })
+        });
+
+        // Custom click events hookups
+        document.querySelector("#skills").addEventListener("click", () => {
+            for (let i = 0; i < skillOverlaysPercentage.length; i++) {
+                setTimeout(function() { 
+                    skillOverlays[i].style.clipPath = `polygon(${skillOverlaysPercentage[i].join(", ")})`
+                }, Math.random() * 400);
+            }
+        })
+        skillsTheme.querySelector(".close-button").addEventListener("click", () => {
+            for (let i = 0; i < skillOverlaysPercentage.length; i++) {
+                skillOverlays[i].style.clipPath = `polygon(${"50% 50%,".repeat(skillOverlaysPercentage[i].length).slice(0, -1)})`
+            }
+        })
+        //
+
+        document.querySelectorAll(".theme-window").forEach(element => {
+            let closeButton = element.querySelector(".close-button")
+            element.querySelector(".close-right").addEventListener("mouseover", (event) => {
+                console.log("cick")
+                closeButton.style.transform = `translate(calc(100vw - 70px), 10px)`
+            })
+            closeButton.addEventListener("click", () => {
+                element.style.width = "0px"
+                element.style.height = "0px"
+                element.style.transform = "translate(-1px, 10px)"
+                let newDiv = element.querySelector(".close-left").cloneNode(true)
+                element.querySelector(".close-left").parentNode.replaceChild(newDiv, element.querySelector(".close-left"))
+            })
+        });
+
+        let maximized = []
+
+        document.querySelectorAll(".skill-window").forEach(element => {
+            let maximizedPointer = maximized.length
+            maximized.push(false)
+            let button = element.querySelector(".maximize-button")
+
+            button.addEventListener("click", () => {
+                if (~maximized[maximizedPointer]) {
+                    document.querySelectorAll(".skill-window").forEach(e => {
+                        if (e !== element) {
+                            e.style.width = "70px"
+                            e.querySelector(".maximize-button").querySelector(".maximize-2").style.width = "calc(100% - 8px)"
+                            e.querySelector(".maximize-button").querySelector(".maximize-2").style.height = "calc(100% - 8px)"
+                            e.querySelector(".maximize-button").querySelector(".maximize-2").style.transform = ""
+                        }
+                    });
+                    element.style.width = "79vw"
+                    button.querySelector(".maximize-2").style.width = "110%"
+                    button.querySelector(".maximize-2").style.height = "calc(101% - 4px)"
+                    button.querySelector(".maximize-2").style.transform = "translateY(-4px)"
+
+                    element.querySelectorAll(".round").forEach(round => {
+                        round.style.transition = "border cubic-bezier(0.075, 0.82, 0.165, 1) .65s, background-color cubic-bezier(0.075, 0.82, 0.165, 1) 1s"
+                        round.style.backgroundColor = "rgba(186, 186, 186, 0.95)"
+                        round.style.border = "rgb(183, 183, 183) solid 4px"
+                        setTimeout(() => {
+                            round.style.backgroundColor = ""
+                            round.style.border = ""
+                            round.style.transition = ""
+                        }, 1000)
+
+                    })
+                } else {
+                    document.querySelectorAll(".skill-window").forEach(e => {
+                        e.style.width = "calc(33vw - 10px)"
+                        e.querySelector(".maximize-button").querySelector(".maximize-2").style.width = "calc(100% - 8px)"
+                        e.querySelector(".maximize-button").querySelector(".maximize-2").style.height = "calc(100% - 8px)"
+                        e.querySelector(".maximize-button").querySelector(".maximize-2").style.transform = ""
+                    });
+                    button.querySelector(".maximize-2").style.width = "calc(100% - 8px)"
+                    button.querySelector(".maximize-2").style.height = "calc(100% - 8px)"
+                    button.querySelector(".maximize-2").style.transform = ""
+                }
+                let notMax = ~maximized[maximizedPointer]
+                maximized = [false, false, false]
+                maximized[maximizedPointer] = notMax
+            })
+
+        });
+        
+    </script>
 </body>
 </html>
