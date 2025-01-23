@@ -1089,8 +1089,10 @@
                 element.style.width = "0px"
                 element.style.height = "0px"
                 element.style.transform = "translate(-1px, 10px)"
-                let newDiv = element.querySelector(".close-left").cloneNode(true)
-                element.querySelector(".close-left").parentNode.replaceChild(newDiv, element.querySelector(".close-left"))
+                if (element.querySelector(".close-left")) {
+                    let newDiv = element.querySelector(".close-left").cloneNode(true)
+                    element.querySelector(".close-left").parentNode.replaceChild(newDiv, element.querySelector(".close-left"))
+                }
             })
         });
 
