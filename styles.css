@@ -719,6 +719,14 @@ body::-webkit-scrollbar {
     max-width: 300px;
 }
 
+.project-screen-vid {
+    transition: opacity cubic-bezier(0.075, 0.82, 0.165, 1) 9s;
+}
+
+.project-screen-img {
+    transition: opacity cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
+}
+
 .project-preview-wrapper {
     margin: 30px;
     margin-top: 20px;
@@ -744,10 +752,6 @@ body::-webkit-scrollbar {
 
 .on-button {
     background-color: rgb(220, 39, 39);
-}
-
-.on-button:active {
-    background-color: rgb(39, 220, 42);
 }
 
 .project-text {
