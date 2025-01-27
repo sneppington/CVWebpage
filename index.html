@@ -454,52 +454,56 @@
             <div id="projects-theme" class="theme-window">
                 <div class="window-top">
                     <div id="searcher-projects">
-                        <input id="searcher-projects-input-field" placeholder="Search for a project">
-                        <div class="wrapper" style="display: flex; align-items: center; width: fit-content; transform: translate(-13px, 0); gap: 5px">
-                            <div id="searcher-projects-button">
+                        <div id="filter-wrapper">
+                            <div id="searcher-projects-filter">
+                                <div style="display: flex; gap: 5px;">
+                                    <span>
+                                    Filter
+                                    </span>
+                                    <div id="searcher-projects-filter-arrow">
+                                    </div>
+                                </div>
                             </div>
-                            <div id="filter-wrapper">
-                                <div id="searcher-projects-filter">
-                                    <div class="wrapper" style="display: flex; gap: 5px;">
-                                        <span>
-                                        Filter
+                            <div class="button-hitbox" style="position: absolute; width: 180px; height: 80px;">
+                            </div>
+                            <div id="filter-list-wrapper">
+                                <div id="filter-list">
+                                    <div class="filter">
+                                        <span class="skill">
+                                            HTML/CSS
                                         </span>
-                                        <div id="searcher-projects-filter-arrow">
+                                        <div class="checkmark">
+                                        </div>
+                                    </div>
+                                    <div class="filter">
+                                        <span class="skill">
+                                            JavaScript
+                                        </span>
+                                        <div class="checkmark">
+                                        </div>
+                                    </div>
+                                    <div class="filter">
+                                        <span class="skill">
+                                            React
+                                        </span>
+                                        <div class="checkmark">
+                                        </div>
+                                    </div>
+                                    <div class="filter">
+                                        <span class="skill">
+                                            Python
+                                        </span>
+                                        <div class="checkmark">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="button-hitbox" style="position: absolute; width: 80%; height: 80px;">
-                                </div>
-                                <div id="filter-list-wrapper">
-                                    <div id="filter-list">
-                                        <div class="filter">
-                                            <span class="skill">
-                                                HTML/CSS
-                                            </span>
-                                            <div class="checkmark">
-                                            </div>
-                                        </div>
-                                        <div class="filter">
-                                            <span class="skill">
-                                                JavaScript
-                                            </span>
-                                            <div class="checkmark">
-                                            </div>
-                                        </div>
-                                        <div class="filter">
-                                            <span class="skill">
-                                                React
-                                            </span>
-                                            <div class="checkmark">
-                                            </div>
-                                        </div>
-                                        <div class="filter">
-                                            <span class="skill">
-                                                Python
-                                            </span>
-                                            <div class="checkmark">
-                                            </div>
-                                        </div>
+                            </div>
+                        </div>
+                        <input id="searcher-projects-input-field" placeholder="Search for a project">
+                        <div class="wrapper" style="display: flex; align-items: center; width: fit-content; transform: translate(-13px, 0); gap: 5px">
+                            <div id="searcher-projects-button">
+                                <div id="browse-lens" style="width: 13%; height: 30%; rotate: 35deg; transform: translate(0px, 13px); display: flex; align-items: flex-end; justify-content: center;">
+                                    <div style="width: 400%; aspect-ratio: 1/1; border-radius: 50%; transform: translateY(-60%); flex-shrink: 0;">
                                     </div>
                                 </div>
                             </div>
@@ -513,7 +517,7 @@
                 <div id="projects-scroll">
                     <div class="project" style="--skills: 'React'">
                         <div class="title">
-                            Highschool club landing page
+                            mrow
                         </div>
                         <div class="project-content-wrapper">
                             <div class="project-skill-preview">
@@ -961,8 +965,8 @@
                 loadBar.innerHTML += "<div></div>"
                 loadCount++
 
-                if (loadCount / 8 !== 2) {
-                //if (false) {
+                //if (loadCount / 8 !== 2) {
+                if (false) {
                     loadInPage()
                 } else {
                     setTimeout(() => {
@@ -1297,31 +1301,22 @@
         });
         
         let overFilter = false
+        let closing = false
         let projectsInput = document.querySelector("#searcher-projects-input-field")
         let projectsFilter = document.querySelector("#searcher-projects-filter")
 
         document.querySelector("#searcher-projects").addEventListener("mouseover", () => {
-            document.querySelector("#searcher-projects .wrapper").style.transform = "translate(5px, 0)"
+            document.querySelector("#searcher-projects .wrapper").style.transform = "translate(4px, 0)"
             document.querySelector("#searcher-projects-button").style.width = "45px"
             projectsInput.style.width = "min(450px, 60vw)"
             projectsInput.style.fontSize = "16px"
         })
 
         document.querySelector("#searcher-projects").addEventListener("mouseout", () => {
-            console.log(overFilter)
-            if (overFilter) {
-                setTimeout(() => {
-                    document.querySelector("#searcher-projects .wrapper").style.transform = "translate(calc(-13px), 0)"
-                    document.querySelector("#searcher-projects-button").style.width = "10px"
-                    projectsInput.style.width = ""
-                    projectsInput.style.fontSize = ""
-                }, 300)
-            } else {
-                document.querySelector("#searcher-projects .wrapper").style.transform = "translate(calc(-13px), 0)"
-                document.querySelector("#searcher-projects-button").style.width = "10px"
-                projectsInput.style.width = ""
-                projectsInput.style.fontSize = ""
-            }
+            document.querySelector("#searcher-projects .wrapper").style.transform = "translate(-13px, 0)"
+            document.querySelector("#searcher-projects-button").style.width = "10px"
+            projectsInput.style.width = ""
+            projectsInput.style.fontSize = ""
         })
         
         document.querySelector("#filter-wrapper").addEventListener("mouseover", () => {
