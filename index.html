@@ -77,7 +77,7 @@
                 </div>
                 <div class="inner-theme-scroll" style="height: calc(100% - 70px); width: 100vw; overflow-y: scroll; position: absolute;">
                     <div style="margin-top: 30px; margin-left: 10vw; margin-right: 17vw; font-family: SquaredFont;">
-                        <div style="width: 100%; display: flex;">
+                        <div id="about-intro-flex">
                             <div>
                                 <div id="photography">
                                 </div>
@@ -85,11 +85,11 @@
                                     Victor Churruca
                                 </div>
                             </div>
-                            <div style="margin-left: 1vw; display: flex; flex-direction: column;">
-                                <div style="font-size: min(50px, 5vw);">
+                            <div id="who-text">
+                                <div style="font-size: min(50px, 6vw);">
                                     <b>Who am I</b>
                                 </div>
-                                <div>
+                                <div style="font-size: min(20px, 4vw);">
                                     I am a passionate frontend developer with a strong focus on creating unique and engaging web experiences. 
                                     <br>With over four years of daily coding experience, I thrive in turning creative ideas into functional designs using the usual technologies of the sector.
                                     <br>In addition to web development, I have collaborated on game development projects with teams, honing my skills in teamwork, communication, and meeting tight deadlines. 
@@ -211,7 +211,7 @@
                 <div style="display: flex; align-items: centerd; justify-content: center; width: 100%; height: calc(100% - 70px);">
                     <div id="skills-wrapper">
                         <div class="skill-window">
-                            <div class="window-top" style="display: flex; align-items: center; justify-content: space-between;">
+                            <div class="window-top">
                                 <div class="skills-name">
                                     Technical Skills
                                 </div>
@@ -452,7 +452,7 @@
                 </div>
             </div>
             <div id="projects-theme" class="theme-window">
-                <div class="window-top">
+                <div class="window-top" style="display: flex; justify-content: flex-start; align-items: center;">
                     <div id="searcher-projects">
                         <div id="filter-wrapper">
                             <div id="searcher-projects-filter">
@@ -499,7 +499,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input id="searcher-projects-input-field" placeholder="Search for a project">
+                        <input id="searcher-projects-input-field" placeholder="Search project">
                         <div class="wrapper" style="display: flex; align-items: center; width: fit-content; transform: translate(-13px, 0); gap: 5px">
                             <div id="searcher-projects-button">
                                 <div id="browse-lens" style="width: 13%; height: 30%; rotate: 35deg; transform: translate(0px, 13px); display: flex; align-items: flex-end; justify-content: center;">
@@ -793,8 +793,6 @@
         }
 
         function browseSkills(searchQuery) {
-            console.log("Browsing with query:", searchQuery);
-
             projectsToShow = []
             const projects = document.querySelectorAll(".project");
             projects.forEach(element => {
@@ -849,6 +847,8 @@
         }
 
         // Extra loading //
+
+        document.querySelector("#searcher-projects").style.scale = `${Math.min(window.innerWidth / 550, 1)}`
 
         const hex2 = document.querySelector("#skill-hex2-main")
         const hex2Buttons = document.querySelector("#hex2-buttons")
@@ -935,7 +935,7 @@
             let activated = false
             let bg = element.querySelector(".checkmark")
             let skillName = element.querySelector(".skill").textContent.replace(/(\r\n|\n|\r|\s)/gm, "")
-            console.log(skillName)
+
             element.addEventListener("click", (event) => {
                 if (activated) {
                     bg.style = "--progress cubic-bezier(0.075, 0.82, 0.165, 1) 0.1s"
@@ -951,7 +951,6 @@
                     ActiveSkills.push(skillName)
                 }
                 activated = !activated
-                console.log(ActiveSkills)
             })
         });
 
@@ -1177,9 +1176,7 @@
 
             let targetscroll = Math.min(scrollPercent * currentWindowTheme.querySelector(".scroll-holder").clientHeight, currentWindowTheme.querySelector(".scroll-holder").clientHeight - currentWindowTheme.querySelector(".scroll-bar").clientHeight)
             
-            console.log(targetscroll)
             currentWindowTheme.querySelector(".scroll-bar").style.transform = `translateY(${targetscroll}px)`
-            
         }
 
         currentWindowTheme.querySelector(".inner-theme-scroll").addEventListener('scroll', updateScrollBar)
@@ -1207,8 +1204,7 @@
                         updateScrollBar()
                         let closeButton = element[1].querySelector(".close-button")
                         element[1].querySelector(".close-left").addEventListener("mouseover", (event) => {
-                            console.log("cick")
-                            closeButton.style.transform = `translate(10px, 10px)`
+                            closeButton.style.transform = `translate(10px, 0)`
                         })
                     }, 500);
                 }
@@ -1234,8 +1230,7 @@
             let closeButton = element.querySelector(".close-button")
             if (element.querySelector(".close-right")) {
                 element.querySelector(".close-right").addEventListener("mouseover", (event) => {
-                    console.log("cick")
-                    closeButton.style.transform = `translate(calc(100vw - 70px), 10px)`
+                    closeButton.style.transform = `translate(calc(100vw - 70px), 0)`
                 })
             }
             closeButton.addEventListener("click", () => {
@@ -1264,9 +1259,15 @@
                             e.querySelector(".maximize-button").querySelector(".maximize-2").style.width = "calc(100% - 8px)"
                             e.querySelector(".maximize-button").querySelector(".maximize-2").style.height = "calc(100% - 8px)"
                             e.querySelector(".maximize-button").querySelector(".maximize-2").style.transform = ""
+                            e.style.flexShrink = ""
                         }
                     });
-                    element.style.width = "79vw"
+                    if (window.innerWidth < 1000) {
+                        element.style.width = "95vw"
+                        element.style.flexShrink = "0"
+                    } else {
+                        element.style.width = "79vw"
+                    }
                     button.querySelector(".maximize-2").style.width = "110%"
                     button.querySelector(".maximize-2").style.height = "calc(101% - 4px)"
                     button.querySelector(".maximize-2").style.transform = "translateY(-4px)"
@@ -1283,6 +1284,7 @@
 
                     })
                 } else {
+                    element.style.flexShrink = ""
                     document.querySelectorAll(".skill-window").forEach(e => {
                         e.style.width = "calc(33vw - 10px)"
                         e.querySelector(".maximize-button").querySelector(".maximize-2").style.width = "calc(100% - 8px)"

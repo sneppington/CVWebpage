@@ -23,8 +23,15 @@
 body {
     margin: 0;
     padding: 0;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     background-color: black;
+    pointer-events: none;
+}
+
+body > * {
+    pointer-events: auto;
 }
 
 /* Hide scrollbar for Webkit browsers */
@@ -144,6 +151,9 @@ body::-webkit-scrollbar {
     width: 100%;
     height: 70px;
     overflow: hidden;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
 }
 
 .close-button {
@@ -152,9 +162,9 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: center;
     position: absolute;
-    transform: translate(calc(100vw - 70px), 10px);
-    width: 50px;
-    height: 50px;
+    transform: translate(calc(100vw - 140%), 0);
+    width: min(50px, 10vw);
+    height: min(50px, 10vw);
     background-color: black;
     transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 0.8s;
 }
@@ -165,8 +175,8 @@ body::-webkit-scrollbar {
 
 .close-1 {
     position: absolute;
-    height: 4px;
-    width: 35px;
+    height: 8%;
+    width: 70%;
     background-color: rgba(233, 233, 233, 0.885);
     rotate: 45deg;
     transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s, height cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
@@ -174,8 +184,8 @@ body::-webkit-scrollbar {
 
 .close-2 {
     position: absolute;
-    height: 4px;
-    width: 35px;
+    height: 8%;
+    width: 70%;
     background-color: rgba(233, 233, 233, 0.885);
     rotate: -45deg;
     transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s, height cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
@@ -208,6 +218,18 @@ body::-webkit-scrollbar {
     border: 5px solid rgba(233, 233, 233, 0.885);
     width: 300px;
     height: 300px;
+}
+
+#about-intro-flex {
+    width: 100%; 
+    display: flex; 
+    gap: 10px;
+}
+
+#who-text {
+    display: flex; 
+    flex-direction: column; 
+    width: auto;
 }
 
 .yellow {
@@ -294,9 +316,17 @@ body::-webkit-scrollbar {
     width: 100%;
     text-align: center;
     color: black;
-    font-size: larger;
+    font-size: min(20px, 3vw);
     font-weight: bolder;
     margin: 10px;
+}
+
+#hover-skill-window {
+    font-size: min(20px, 4vw);
+}
+
+#hover-skill-window li {
+    font-size: min(15px, 3vw);
 }
 
 .maximize-button {
@@ -306,8 +336,8 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: center;
     margin-right: 10px;
-    width: 50px;
-    height: 50px;
+    width: min(50px, 10vw);
+    height: min(50px, 10vw);
     background-color: black;
 }
 
@@ -324,8 +354,8 @@ body::-webkit-scrollbar {
 .maximize-1 {
     transform: translateY(3px);
     background-color: rgba(233, 233, 233, 0.885);
-    height: 25px;
-    width: 30px;
+    height: 50%;
+    width: 60%;
     border: none;
     display: flex;
     align-items: center;
@@ -553,6 +583,7 @@ body::-webkit-scrollbar {
 }
 
 #searcher-projects {
+    z-index: 1;
     position: absolute;
     width: calc(100% - 70px);
     height: 65px;
@@ -560,6 +591,7 @@ body::-webkit-scrollbar {
     display: flex;
     align-items: center;
     gap: 1px;
+    transform-origin: center left;
 }
 
 #searcher-projects-input-field {
@@ -799,6 +831,9 @@ body::-webkit-scrollbar {
         position: absolute;
         z-index: -1;
         transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 3s, opacity cubic-bezier(0.075, 0.82, 0.165, 1) 9s;
+    }
+    #about-intro-flex {
+        flex-wrap: wrap; 
     }
 }
 
