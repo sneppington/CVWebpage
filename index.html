@@ -8,6 +8,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body style="font-family: 'SquaredFont'">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width: 0; height: 0;">
+        <defs>
+            <pattern id="grid-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="black" stroke-width="1"/>
+            </pattern>
+            <filter id="grid-filter">
+                <feImage xlink:href="#grid-pattern" result="grid"/>
+                <feComposite in="SourceGraphic" in2="grid" operator="over"/>
+            </filter>
+
+            <filter id="teal-filter">
+                <feColorMatrix id="matrix" type="matrix"
+                    values="0.33 0.33 0.33 0 0
+                            0.33 0.33 0.33 0 0
+                            0.33 0.33 0.33 0 0
+                            0    0    0    1 0">
+                </feColorMatrix>
+            </filter>
+        </defs>
+    </svg>
     <img src="Storage/overlay.png" style="pointer-events: none; position: absolute; width: 100vw; height: 100vh; object-fit: fill; opacity: 0.1; z-index: 1;">
     <div style="pointer-events: none; display: flex; align-items: center; justify-content: center; width: 100%; height: 100vh; position: absolute; overflow: hidden;">
         <video id="background-load-video" autoplay muted loop>
@@ -70,7 +90,7 @@
                     </div>
                     <div class="close-right">
                     </div>
-                    <div class="close-button">
+                    <div id="who-close" class="close-button">
                         <div class="close-1"></div>
                         <div class="close-2"></div>
                     </div>
@@ -79,7 +99,9 @@
                     <div style="margin-top: 30px; margin-left: 10vw; margin-right: 17vw; font-family: SquaredFont;">
                         <div id="about-intro-flex">
                             <div>
-                                <div id="photography">
+                                <div id="photography" style="overflow: hidden;">
+                                    <img id="photography-img" src="Storage/testImage.png"/>
+                                    <img id="photography-grid" src="Storage/grid.png">
                                 </div>
                                 <div style="font-size: large;">
                                     Victor Churruca
@@ -98,7 +120,7 @@
                         </div>
                         <br><br>
                         <div>
-                            <div style="font-size: 20px; margin-bottom: 10px;">
+                            <div style="margin-bottom: 10px;">
                                 Technical Skills
                             </div>
                             <span style="color: rgba(136, 157, 225, 0.885);">Coding Experience:</span> 4 years of daily coding practice.<br><br>
@@ -729,6 +751,38 @@
         let projectsScroll = document.querySelector("#projects-scroll")
         // Functions //
 
+        function animateMatrix() {
+            let startTime = performance.now();
+            let duration = 3000; // Animation duration (3 seconds)
+
+            function updateMatrix(time) {
+                let elapsed = time - startTime;
+                let progress = Math.min(elapsed / duration, 1); // Normalize progress [0,1]
+
+                // Interpolating from grayscale to teal
+                let g = 0.33 * (1 - progress) + 0.5 * progress;
+                let b = 0.33 * (1 - progress) + 0.5 * progress;
+                let r = 0.33 * (1 - progress); // Red fades out
+
+                let values = `${r} ${r} ${r} 0 0
+                            ${g} ${g} ${g} 0 0
+                            ${b} ${b} ${b} 0 0
+                            0 0 0 1 0`;
+
+                let matrixElement = document.getElementById("matrix");
+                if (matrixElement) {
+                    matrixElement.setAttribute("values", values);
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateMatrix);
+                }
+            }
+
+            requestAnimationFrame(updateMatrix);
+        }
+
+
         function isDivInMiddleOfScreenY(div) {
             const divRect = div.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
@@ -1221,7 +1275,6 @@
         })
         skillsTheme.querySelector(".close-button").addEventListener("click", () => {
             for (let i = 0; i < skillOverlaysPercentage.length; i++) {
-                console.log("50% 50%,".repeat(skillOverlaysPercentage[i].length).slice(0, -1))
                 skillOverlays[i].style.clipPath = `polygon(${"50% 50%,".repeat(skillOverlaysPercentage[i].length).slice(0, -1)})`
             }
         })
@@ -1231,7 +1284,7 @@
             let closeButton = element.querySelector(".close-button")
             if (element.querySelector(".close-right")) {
                 element.querySelector(".close-right").addEventListener("mouseover", (event) => {
-                    closeButton.style.transform = `translate(calc(100vw - 70px), 0)`
+                    closeButton.style.transform = `translate(calc(100vw - 140%), 0)`
                 })
             }
             closeButton.addEventListener("click", () => {
@@ -1353,6 +1406,21 @@
                 }, 300);  
             })
             setTimeout(turnOnProjects, 400);
+        })
+
+        document.querySelector("#who").addEventListener("click", () => {
+            animateMatrix()
+            setTimeout(() => {
+                document.querySelector("#photography-img").classList.add("teal")
+                document.querySelector("#photography-grid").style.height = "100%"
+                document.querySelector("#photography").style.borderColor = "rgb(0,102,102)"
+            }, 300);
+        })
+
+        document.querySelector("#who-close").addEventListener("click", () => {
+            document.querySelector("#photography-img").classList.remove("teal")
+            document.querySelector("#photography-grid").style.height = "300%"
+            document.querySelector("#photography").style.borderColor = "rgba(233, 233, 233, 0.885)"
         })
         
     </script>
