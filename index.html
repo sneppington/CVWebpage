@@ -1411,11 +1411,9 @@
 
         document.querySelector("#who").addEventListener("click", () => {
             animateMatrix()
-            setTimeout(() => {
-                document.querySelector("#photography-img").classList.add("teal")
-                document.querySelector("#photography-grid").style.height = "100%"
-                document.querySelector("#photography").style.borderColor = "rgb(0,102,102)"
-            }, 300);
+            document.querySelector("#photography-img").classList.add("teal")
+            document.querySelector("#photography-grid").style.height = "100%"
+            document.querySelector("#photography").style.borderColor = "rgb(0,102,102)"
         })
 
         document.querySelector("#who-close").addEventListener("click", () => {
