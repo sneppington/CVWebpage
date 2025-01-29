@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body style="font-family: 'SquaredFont'">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width: 0; height: 0;">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width: 0; height: 0; position: absolute;">
         <defs>
             <pattern id="grid-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
                 <path d="M 20 0 L 0 0 0 20" fill="none" stroke="black" stroke-width="1"/>
@@ -1018,8 +1018,8 @@
                 loadBar.innerHTML += "<div></div>"
                 loadCount++
 
-                if (loadCount / 8 !== 2) {
-                //if (false) {
+                //if (loadCount / 8 !== 2) {
+                if (false) {
                     loadInPage()
                 } else {
                     setTimeout(() => {
@@ -1287,10 +1287,11 @@
                     closeButton.style.transform = `translate(calc(100vw - 140%), 0)`
                 })
             }
+            element.style.transform = "translate(-1px, -30px)"
             closeButton.addEventListener("click", () => {
                 element.style.width = "0px"
                 element.style.height = "0px"
-                element.style.transform = "translate(-1px, 10px)"
+                element.style.transform = "translate(-1px, -30px)"
                 if (element.querySelector(".close-left")) {
                     let newDiv = element.querySelector(".close-left").cloneNode(true)
                     element.querySelector(".close-left").parentNode.replaceChild(newDiv, element.querySelector(".close-left"))

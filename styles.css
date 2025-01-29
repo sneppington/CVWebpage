@@ -60,6 +60,8 @@ body::-webkit-scrollbar {
     color: rgba(233, 233, 233, 0.885);
     opacity: 0;
     z-index: -2;
+    height: 100vh;
+    width: 100vw;
 }
 
 #background-load-video {
@@ -189,11 +191,12 @@ body::-webkit-scrollbar {
 }
 
 .theme-window {
+    top: 0;
     width: 0px;
     height: 0px;
-    -webkit-transform: translate(-1px, 10px);
-        -ms-transform: translate(-1px, 10px);
-            transform: translate(-1px, 10px);
+    -webkit-transform: translate(-1px, 30px);
+        -ms-transform: translate(-1px, 30px);
+            transform: translate(-1px, 30px);
     position: absolute;
     overflow: hidden;
     background-color: black;
